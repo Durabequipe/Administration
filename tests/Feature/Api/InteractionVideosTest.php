@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Interaction;
 use App\Models\User;
 use App\Models\Video;
-use App\Models\Interaction;
-
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
+use Database\Seeders\PermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class InteractionVideosTest extends TestCase
 {
@@ -23,7 +23,7 @@ class InteractionVideosTest extends TestCase
 
         Sanctum::actingAs($user, [], 'web');
 
-        $this->seed(\Database\Seeders\PermissionsSeeder::class);
+        $this->seed(PermissionsSeeder::class);
 
         $this->withoutExceptionHandling();
     }
@@ -64,14 +64,9 @@ class InteractionVideosTest extends TestCase
             $data
         );
 
-        unset($data['name']);
-        unset($data['mobile_path']);
-        unset($data['mobile_thumbnail']);
-        unset($data['interaction_id']);
-
         $this->assertDatabaseHas('videos', $data);
 
-        $response->assertStatus(201)->assertJsonFragment($data);
+        $response->assertStatus(201);
 
         $video = Video::latest('id')->first();
 

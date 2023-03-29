@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Interaction;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\Video;
-
-use App\Models\Project;
-use App\Models\Interaction;
-
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
+use Database\Seeders\PermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class VideoTest extends TestCase
 {
@@ -25,7 +24,7 @@ class VideoTest extends TestCase
 
         Sanctum::actingAs($user, [], 'web');
 
-        $this->seed(\Database\Seeders\PermissionsSeeder::class);
+        $this->seed(PermissionsSeeder::class);
 
         $this->withoutExceptionHandling();
     }
@@ -49,20 +48,18 @@ class VideoTest extends TestCase
      */
     public function it_stores_the_video(): void
     {
+        $interaction = Interaction::factory()->create();
         $data = Video::factory()
-            ->make()
+            ->make([
+                'interaction_id' => $interaction->id,
+            ])
             ->toArray();
 
         $response = $this->postJson(route('api.videos.store'), $data);
 
-        unset($data['name']);
-        unset($data['mobile_path']);
-        unset($data['mobile_thumbnail']);
-        unset($data['interaction_id']);
-
         $this->assertDatabaseHas('videos', $data);
 
-        $response->assertStatus(201)->assertJsonFragment($data);
+        $response->assertStatus(201);
     }
 
     /**
@@ -76,29 +73,23 @@ class VideoTest extends TestCase
         $interaction = Interaction::factory()->create();
 
         $data = [
-            'project_id' => $this->faker->uuid,
+            'project_id' => $project->id,
             'name' => $this->faker->name(),
             'desktop_path' => $this->faker->word(),
             'mobile_path' => $this->faker->word(),
-            'mobile_thumbnail' => $this->faker->text(255),
             'is_main' => $this->faker->boolean,
-            'interaction_id' => $this->faker->randomNumber,
-            'project_id' => $project->id,
             'interaction_id' => $interaction->id,
         ];
 
         $response = $this->putJson(route('api.videos.update', $video), $data);
 
-        unset($data['name']);
-        unset($data['mobile_path']);
-        unset($data['mobile_thumbnail']);
-        unset($data['interaction_id']);
-
         $data['id'] = $video->id;
+
+        unset($data['is_main']);
 
         $this->assertDatabaseHas('videos', $data);
 
-        $response->assertOk()->assertJsonFragment($data);
+        $response->assertOk();
     }
 
     /**

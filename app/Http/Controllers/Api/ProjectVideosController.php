@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\VideoResource;
 use App\Http\Resources\VideoCollection;
+use App\Http\Resources\VideoResource;
+use App\Models\Project;
+use App\Models\Video;
+use Illuminate\Http\Request;
 
 class ProjectVideosController extends Controller
 {
@@ -33,6 +34,11 @@ class ProjectVideosController extends Controller
             'desktop_path' => ['required', 'max:255', 'string'],
             'desktop_thumbnail' => ['image', 'max:1024', 'nullable'],
             'is_main' => ['nullable', 'boolean'],
+            'name' => ['required', 'max:255', 'string'],
+            'mobile_path' => ['required', 'max:255', 'string'],
+            'mobile_thumbnail' => ['image', 'max:1024', 'nullable'],
+            'interaction_id' => ['required', 'exists:interactions,id'],
+
         ]);
 
         if ($request->hasFile('desktop_thumbnail')) {

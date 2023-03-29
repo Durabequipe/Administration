@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Interaction;
+use App\Models\Project;
 use App\Models\Video;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VideoFactory extends Factory
@@ -26,10 +27,9 @@ class VideoFactory extends Factory
             'name' => $this->faker->name(),
             'desktop_path' => $this->faker->word(),
             'mobile_path' => $this->faker->word(),
-            'mobile_thumbnail' => $this->faker->text(255),
             'is_main' => $this->faker->boolean,
-            'project_id' => \App\Models\Project::factory(),
-            'interaction_id' => \App\Models\Interaction::factory(),
+            'project_id' => Project::factory(),
+            'interaction_id' => Interaction::factory(),
         ];
     }
 }

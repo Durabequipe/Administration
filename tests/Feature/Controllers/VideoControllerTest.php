@@ -2,15 +2,14 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Models\Interaction;
+use App\Models\Project;
 use App\Models\User;
 use App\Models\Video;
-
-use App\Models\Project;
-use App\Models\Interaction;
-
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Database\Seeders\PermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class VideoControllerTest extends TestCase
 {
@@ -24,7 +23,7 @@ class VideoControllerTest extends TestCase
             User::factory()->create(['email' => 'admin@admin.com'])
         );
 
-        $this->seed(\Database\Seeders\PermissionsSeeder::class);
+        $this->seed(PermissionsSeeder::class);
 
         $this->withoutExceptionHandling();
     }
@@ -120,23 +119,15 @@ class VideoControllerTest extends TestCase
         $interaction = Interaction::factory()->create();
 
         $data = [
-            'project_id' => $this->faker->uuid,
             'name' => $this->faker->name(),
             'desktop_path' => $this->faker->word(),
             'mobile_path' => $this->faker->word(),
-            'mobile_thumbnail' => $this->faker->text(255),
             'is_main' => $this->faker->boolean,
-            'interaction_id' => $this->faker->randomNumber,
             'project_id' => $project->id,
             'interaction_id' => $interaction->id,
         ];
 
         $response = $this->put(route('videos.update', $video), $data);
-
-        unset($data['name']);
-        unset($data['mobile_path']);
-        unset($data['mobile_thumbnail']);
-        unset($data['interaction_id']);
 
         $data['id'] = $video->id;
 
