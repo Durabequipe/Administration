@@ -90,8 +90,6 @@ Route::name('api.')
             'store',
         ])->name('videos.interacts.store');
 
-        Route::apiResource('interacts', InteractController::class);
-
         Route::apiResource('users', UserController::class);
 
         // User Projects
