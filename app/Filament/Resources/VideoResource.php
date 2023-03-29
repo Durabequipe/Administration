@@ -2,18 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Video;
-use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\VideoResource\Pages;
+use App\Models\Video;
+use Filament\{Tables};
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Resources\{Form, Resource, Table};
+use Filament\Tables\Filters\SelectFilter;
 
 class VideoResource extends Resource
 {
@@ -43,6 +42,7 @@ class VideoResource extends Resource
                     FileUpload::make('desktop_path')
                         ->required()
                         ->placeholder('Desktop Path')
+                        ->disk('videos')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -62,6 +62,7 @@ class VideoResource extends Resource
 
                     FileUpload::make('mobile_path')
                         ->required()
+                        ->disk('videos')
                         ->placeholder('Mobile Path')
                         ->columnSpan([
                             'default' => 12,
