@@ -18,7 +18,7 @@ class ProjectPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_project');
+        return $user->can('list projects');
     }
 
     /**
@@ -30,7 +30,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        return $user->can('view_project') && $user->projects()->where('project_id', $project->id)->exists();
+        return $user->can('view projects') && $user->projects()->where('project_id', $project->id)->exists();
     }
 
     /**
