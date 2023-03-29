@@ -27,6 +27,13 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update projects']);
         Permission::create(['name' => 'delete projects']);
 
+        Permission::create(['name' => 'list_projects']);
+        Permission::create(['name' => 'view_project']);
+        Permission::create(['name' => 'create_project']);
+        Permission::create(['name' => 'update_project']);
+        Permission::create(['name' => 'delete_project']);
+        Permission::create(['name' => 'view_any_project']);
+
         Permission::create(['name' => 'list videos']);
         Permission::create(['name' => 'view videos']);
         Permission::create(['name' => 'create videos']);

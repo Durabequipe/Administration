@@ -122,8 +122,8 @@ class VideoControllerTest extends TestCase
         $data = [
             'project_id' => $this->faker->uuid,
             'name' => $this->faker->name(),
-            'desktop_path' => $this->faker->text(255),
-            'mobile_path' => $this->faker->text(255),
+            'desktop_path' => $this->faker->word(),
+            'mobile_path' => $this->faker->word(),
             'mobile_thumbnail' => $this->faker->text(255),
             'is_main' => $this->faker->boolean,
             'interaction_id' => $this->faker->randomNumber,
