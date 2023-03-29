@@ -61,7 +61,6 @@ class VideoResource extends Resource
                         ]),
 
                     FileUpload::make('mobile_path')
-                        ->required()
                         ->disk('videos')
                         ->placeholder('Mobile Path')
                         ->columnSpan([

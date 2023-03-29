@@ -32,6 +32,7 @@ class VideosRelationManager extends RelationManager
                         'lg' => 12,
                     ]),
                 FileUpload::make('desktop_path')
+                    ->required()
                     ->placeholder('Desktop video path')
                     ->disk('videos')
                     ->columnSpan([

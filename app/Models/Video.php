@@ -4,11 +4,11 @@ namespace App\Models;
 
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Video extends Model
 {
@@ -65,8 +65,8 @@ class Video extends Model
     public function mobilePath() : Attribute
     {
         return Attribute::make(
-            get: fn () => url(Storage::disk('videos')->url($this->attributes['mobile_path'])),
-            set: fn ($value) => $this->attributes['mobile_path'] = $value
+            get: fn() => $this->attributes['mobile_path'] ? url(Storage::disk('videos')->url($this->attributes['mobile_path'])) : null,
+            set: fn($value) => $this->attributes['mobile_path'] = $value
         );
     }
 }
