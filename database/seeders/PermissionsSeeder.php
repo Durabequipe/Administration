@@ -15,17 +15,11 @@ class PermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create default permissions
-        Permission::create(['name' => 'list interacts']);
-        Permission::create(['name' => 'view interacts']);
-        Permission::create(['name' => 'create interacts']);
-        Permission::create(['name' => 'update interacts']);
-        Permission::create(['name' => 'delete interacts']);
-
-        Permission::create(['name' => 'list positions']);
-        Permission::create(['name' => 'view positions']);
-        Permission::create(['name' => 'create positions']);
-        Permission::create(['name' => 'update positions']);
-        Permission::create(['name' => 'delete positions']);
+        Permission::create(['name' => 'list interactions']);
+        Permission::create(['name' => 'view interactions']);
+        Permission::create(['name' => 'create interactions']);
+        Permission::create(['name' => 'update interactions']);
+        Permission::create(['name' => 'delete interactions']);
 
         Permission::create(['name' => 'list projects']);
         Permission::create(['name' => 'view projects']);

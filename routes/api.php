@@ -8,14 +8,14 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\InteractController;
-use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\InteractionController;
 use App\Http\Controllers\Api\ProjectUsersController;
 use App\Http\Controllers\Api\UserProjectsController;
 use App\Http\Controllers\Api\ProjectVideosController;
 use App\Http\Controllers\Api\VideoInteractsController;
-use App\Http\Controllers\Api\PositionVideosController;
-use App\Http\Controllers\Api\PositionInteractsController;
+use App\Http\Controllers\Api\InteractionVideosController;
+use \App\Http\Controllers\Api\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,28 +92,6 @@ Route::name('api.')
 
         Route::apiResource('interacts', InteractController::class);
 
-        Route::apiResource('positions', PositionController::class);
-
-        // Position Interacts
-        Route::get('/positions/{position}/interacts', [
-            PositionInteractsController::class,
-            'index',
-        ])->name('positions.interacts.index');
-        Route::post('/positions/{position}/interacts', [
-            PositionInteractsController::class,
-            'store',
-        ])->name('positions.interacts.store');
-
-        // Position Videos
-        Route::get('/positions/{position}/videos', [
-            PositionVideosController::class,
-            'index',
-        ])->name('positions.videos.index');
-        Route::post('/positions/{position}/videos', [
-            PositionVideosController::class,
-            'store',
-        ])->name('positions.videos.store');
-
         Route::apiResource('users', UserController::class);
 
         // User Projects
@@ -129,4 +107,20 @@ Route::name('api.')
             UserProjectsController::class,
             'destroy',
         ])->name('users.projects.destroy');
+
+        Route::apiResource('interactions', InteractionController::class);
+
+        // Interaction Videos
+        Route::get('/interactions/{interaction}/videos', [
+            InteractionVideosController::class,
+            'index',
+        ])->name('interactions.videos.index');
+        Route::post('/interactions/{interaction}/videos', [
+            InteractionVideosController::class,
+            'store',
+        ])->name('interactions.videos.store');
+
+        //Player
+
+        Route::get('/player/{project}', [PlayerController::class, 'index'])->name('player');
     });

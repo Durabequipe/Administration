@@ -7,9 +7,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\InteractController;
-use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\InteractionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +53,6 @@ Route::prefix('/')
 
         Route::resource('projects', ProjectController::class);
         Route::resource('videos', VideoController::class);
-        Route::resource('interacts', InteractController::class);
-        Route::resource('positions', PositionController::class);
         Route::resource('users', UserController::class);
+        Route::resource('interactions', InteractionController::class);
     });

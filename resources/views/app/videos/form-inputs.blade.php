@@ -13,22 +13,22 @@
 
     <x-inputs.group class="w-full">
         <x-inputs.text
-            name="path"
-            label="Path"
-            :value="old('path', ($editing ? $video->path : ''))"
+            name="desktop_path"
+            label="Desktop Path"
+            :value="old('desktop_path', ($editing ? $video->desktop_path : ''))"
             maxlength="255"
-            placeholder="Path"
+            placeholder="Desktop Path"
             required
         ></x-inputs.text>
     </x-inputs.group>
 
     <x-inputs.group class="w-full">
         <div
-            x-data="imageViewer('{{ $editing && $video->thumbnail ? \Storage::url($video->thumbnail) : '' }}')"
+            x-data="imageViewer('{{ $editing && $video->desktop_thumbnail ? \Storage::url($video->desktop_thumbnail) : '' }}')"
         >
             <x-inputs.partials.label
-                name="thumbnail"
-                label="Thumbnail"
+                name="desktop_thumbnail"
+                label="Desktop Thumbnail"
             ></x-inputs.partials.label
             ><br />
 
@@ -52,25 +52,15 @@
             <div class="mt-2">
                 <input
                     type="file"
-                    name="thumbnail"
-                    id="thumbnail"
+                    name="desktop_thumbnail"
+                    id="desktop_thumbnail"
                     @change="fileChosen"
                 />
             </div>
 
-            @error('thumbnail') @include('components.inputs.partials.error')
-            @enderror
+            @error('desktop_thumbnail')
+            @include('components.inputs.partials.error') @enderror
         </div>
-    </x-inputs.group>
-
-    <x-inputs.group class="w-full">
-        <x-inputs.select name="position_id" label="Position" required>
-            @php $selected = old('position_id', ($editing ? $video->position_id : '')) @endphp
-            <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Position</option>
-            @foreach($positions as $value => $label)
-            <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }} >{{ $label }}</option>
-            @endforeach
-        </x-inputs.select>
     </x-inputs.group>
 
     <x-inputs.group class="w-full">

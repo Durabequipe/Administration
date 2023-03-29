@@ -4,9 +4,13 @@ namespace App\Models;
 
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Project extends Model
 {
@@ -19,13 +23,18 @@ class Project extends Model
 
     protected $searchableFields = ['*'];
 
-    public function videos()
+    public function videos() : HasMany
     {
         return $this->hasMany(Video::class);
     }
 
-    public function users()
+    public function users() : BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function mainVideo() : HasOne
+    {
+        return $this->videos()->one()->where('is_main', true) ?? $this->videos()->one();
     }
 }

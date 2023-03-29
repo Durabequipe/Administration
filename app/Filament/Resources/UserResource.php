@@ -90,7 +90,7 @@ class UserResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [UserResource\RelationManagers\ProjectsRelationManager::class];
     }
 
     public static function getPages(): array

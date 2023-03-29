@@ -23,10 +23,12 @@ class VideoFactory extends Factory
     public function definition(): array
     {
         return [
-            'path' => $this->faker->text(255),
+            'desktop_path' => $this->faker->text(255),
+            'mobile_path' => $this->faker->text(255),
+            'mobile_thumbnail' => $this->faker->text(255),
             'is_main' => $this->faker->boolean,
             'project_id' => \App\Models\Project::factory(),
-            'position_id' => \App\Models\Position::factory(),
+            'interaction_id' => \App\Models\Interaction::factory(),
         ];
     }
 }

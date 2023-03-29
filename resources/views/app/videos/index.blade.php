@@ -53,13 +53,10 @@
                                     @lang('crud.videos.inputs.project_id')
                                 </th>
                                 <th class="px-4 py-3 text-left">
-                                    @lang('crud.videos.inputs.path')
+                                    @lang('crud.videos.inputs.desktop_path')
                                 </th>
                                 <th class="px-4 py-3 text-left">
-                                    @lang('crud.videos.inputs.thumbnail')
-                                </th>
-                                <th class="px-4 py-3 text-left">
-                                    @lang('crud.videos.inputs.position_id')
+                                    @lang('crud.videos.inputs.desktop_thumbnail')
                                 </th>
                                 <th class="px-4 py-3 text-left">
                                     @lang('crud.videos.inputs.is_main')
@@ -74,16 +71,12 @@
                                     {{ optional($video->project)->name ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
-                                    {{ $video->path ?? '-' }}
+                                    {{ $video->desktop_path ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
                                     <x-partials.thumbnail
-                                        src="{{ $video->thumbnail ? \Storage::url($video->thumbnail) : '' }}"
+                                        src="{{ $video->desktop_thumbnail ? \Storage::url($video->desktop_thumbnail) : '' }}"
                                     />
-                                </td>
-                                <td class="px-4 py-3 text-left">
-                                    {{ optional($video->position)->type ?? '-'
-                                    }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
                                     {{ $video->is_main ?? '-' }}
@@ -153,7 +146,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6">
+                                <td colspan="5">
                                     @lang('crud.common.no_items_found')
                                 </td>
                             </tr>
@@ -161,7 +154,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="5">
                                     <div class="mt-10 px-4">
                                         {!! $videos->render() !!}
                                     </div>

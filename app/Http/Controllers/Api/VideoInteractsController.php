@@ -17,7 +17,7 @@ class VideoInteractsController extends Controller
         $search = $request->get('search', '');
 
         $interacts = $video
-            ->interactWiths()
+            ->adjacents()
             ->search($search)
             ->latest()
             ->paginate();
@@ -31,10 +31,9 @@ class VideoInteractsController extends Controller
 
         $validated = $request->validate([
             'content' => ['required', 'max:255', 'string'],
-            'position_id' => ['required', 'exists:positions,id'],
         ]);
 
-        $interact = $video->interactWiths()->create($validated);
+        $interact = $video->adjacents()->create($validated);
 
         return new InteractResource($interact);
     }

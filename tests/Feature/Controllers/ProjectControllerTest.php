@@ -109,7 +109,7 @@ class ProjectControllerTest extends TestCase
         $project = Project::factory()->create();
 
         $data = [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->word(),
         ];
 
         $response = $this->put(route('projects.update', $project), $data);

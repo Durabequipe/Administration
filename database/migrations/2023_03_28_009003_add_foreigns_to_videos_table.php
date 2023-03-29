@@ -19,9 +19,9 @@ return new class extends Migration {
                 ->onDelete('CASCADE');
 
             $table
-                ->foreign('position_id')
+                ->foreign('interaction_id')
                 ->references('id')
-                ->on('positions')
+                ->on('interactions')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
@@ -34,7 +34,7 @@ return new class extends Migration {
     {
         Schema::table('videos', function (Blueprint $table) {
             $table->dropForeign(['project_id']);
-            $table->dropForeign(['position_id']);
+            $table->dropForeign(['interaction_id']);
         });
     }
 };

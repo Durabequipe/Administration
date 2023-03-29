@@ -19,36 +19,44 @@ class VideosRelationManager extends RelationManager
 {
     protected static string $relationship = 'videos';
 
-    protected static ?string $recordTitleAttribute = 'path';
+    protected static ?string $recordTitleAttribute = 'desktop_path';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
-                TextInput::make('path')
+                TextInput::make('desktop_path')
                     ->rules(['max:255', 'string'])
-                    ->placeholder('Path')
+                    ->placeholder('Desktop Path')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
                         'lg' => 12,
                     ]),
 
-                FileUpload::make('thumbnail')
-                    ->rules(['file'])
+                FileUpload::make('desktop_thumbnail')
+                    ->rules(['image', 'max:1024'])
                     ->image()
-                    ->placeholder('Thumbnail')
+                    ->placeholder('Desktop Thumbnail')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
                         'lg' => 12,
                     ]),
 
-                Select::make('position_id')
-                    ->rules(['exists:positions,id'])
-                    ->relationship('position', 'type')
-                    ->searchable()
-                    ->placeholder('Position')
+                TextInput::make('mobile_path')
+                    ->rules(['max:255', 'string'])
+                    ->placeholder('Mobile Path')
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 12,
+                    ]),
+
+                FileUpload::make('mobile_thumbnail')
+                    ->rules(['image', 'max:1024'])
+                    ->image()
+                    ->placeholder('Mobile Thumbnail')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -72,9 +80,10 @@ class VideosRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('project.name')->limit(50),
-                Tables\Columns\TextColumn::make('path')->limit(50),
-                Tables\Columns\ImageColumn::make('thumbnail')->rounded(),
-                Tables\Columns\TextColumn::make('position.type')->limit(50),
+                Tables\Columns\TextColumn::make('desktop_path')->limit(50),
+                Tables\Columns\ImageColumn::make(
+                    'desktop_thumbnail'
+                )->rounded(),
                 Tables\Columns\IconColumn::make('is_main'),
             ])
             ->filters([
@@ -112,11 +121,6 @@ class VideosRelationManager extends RelationManager
                 MultiSelectFilter::make('project_id')->relationship(
                     'project',
                     'name'
-                ),
-
-                MultiSelectFilter::make('position_id')->relationship(
-                    'position',
-                    'type'
                 ),
             ])
             ->headerActions([Tables\Actions\CreateAction::make()])

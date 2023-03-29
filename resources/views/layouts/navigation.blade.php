@@ -28,19 +28,14 @@
                         Videos
                         </x-dropdown-link>
                         @endcan
-                        @can('view-any', App\Models\Interact::class)
-                        <x-dropdown-link href="{{ route('interacts.index') }}">
-                        Interacts
-                        </x-dropdown-link>
-                        @endcan
-                        @can('view-any', App\Models\Position::class)
-                        <x-dropdown-link href="{{ route('positions.index') }}">
-                        Positions
-                        </x-dropdown-link>
-                        @endcan
                         @can('view-any', App\Models\User::class)
                         <x-dropdown-link href="{{ route('users.index') }}">
                         Users
+                        </x-dropdown-link>
+                        @endcan
+                        @can('view-any', App\Models\Interaction::class)
+                        <x-dropdown-link href="{{ route('interactions.index') }}">
+                        Interactions
                         </x-dropdown-link>
                         @endcan
                 </x-nav-dropdown>
@@ -124,19 +119,14 @@
                 Videos
                 </x-responsive-nav-link>
                 @endcan
-                @can('view-any', App\Models\Interact::class)
-                <x-responsive-nav-link href="{{ route('interacts.index') }}">
-                Interacts
-                </x-responsive-nav-link>
-                @endcan
-                @can('view-any', App\Models\Position::class)
-                <x-responsive-nav-link href="{{ route('positions.index') }}">
-                Positions
-                </x-responsive-nav-link>
-                @endcan
                 @can('view-any', App\Models\User::class)
                 <x-responsive-nav-link href="{{ route('users.index') }}">
                 Users
+                </x-responsive-nav-link>
+                @endcan
+                @can('view-any', App\Models\Interaction::class)
+                <x-responsive-nav-link href="{{ route('interactions.index') }}">
+                Interactions
                 </x-responsive-nav-link>
                 @endcan
 

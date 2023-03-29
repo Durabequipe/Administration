@@ -40,33 +40,42 @@ class VideoResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('path')
+                    TextInput::make('desktop_path')
                         ->rules(['max:255', 'string'])
                         ->required()
-                        ->placeholder('Path')
+                        ->placeholder('Desktop Path')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
                         ]),
 
-                    FileUpload::make('thumbnail')
+                    FileUpload::make('desktop_thumbnail')
                         ->rules(['file'])
                         ->nullable()
                         ->image()
-                        ->placeholder('Thumbnail')
+                        ->placeholder('Desktop Thumbnail')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
                         ]),
 
-                    Select::make('position_id')
-                        ->rules(['exists:positions,id'])
+                    TextInput::make('mobile_path')
+                        ->rules(['max:255', 'string'])
                         ->required()
-                        ->relationship('position', 'type')
-                        ->searchable()
-                        ->placeholder('Position')
+                        ->placeholder('Mobile Path')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
+
+                    FileUpload::make('mobile_thumbnail')
+                        ->rules(['file'])
+                        ->nullable()
+                        ->image()
+                        ->placeholder('Mobile Thumbnail')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -95,16 +104,19 @@ class VideoResource extends Resource
                 Tables\Columns\TextColumn::make('project.name')
                     ->toggleable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('path')
+                Tables\Columns\TextColumn::make('desktop_path')
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
+
+                Tables\Columns\TextColumn::make('mobile_path')
+                    ->toggleable()
+                    ->searchable(true, null, true)
+                    ->limit(50),
+
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->toggleable()
                     ->circular(),
-                Tables\Columns\TextColumn::make('position.type')
-                    ->toggleable()
-                    ->limit(50),
                 Tables\Columns\IconColumn::make('is_main')
                     ->toggleable()
                     ->boolean(),
@@ -117,20 +129,13 @@ class VideoResource extends Resource
                     ->indicator('Project')
                     ->multiple()
                     ->label('Project'),
-
-                SelectFilter::make('position_id')
-                    ->relationship('position', 'type')
-                    ->indicator('Position')
-                    ->multiple()
-                    ->label('Position'),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            VideoResource\RelationManagers\InteractsRelationManager::class,
-            VideoResource\RelationManagers\InteractsRelationManager::class,
+            VideoResource\RelationManagers\VideosRelationManager::class,
         ];
     }
 

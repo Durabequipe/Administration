@@ -19,7 +19,7 @@ class ProjectController extends Controller
 
         $search = $request->get('search', '');
 
-        $projects = Project::search($search)
+        $projects = auth()->user()->projects()->search($search)
             ->latest()
             ->paginate();
 

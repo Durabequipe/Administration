@@ -43,40 +43,9 @@ return [
         'show_title' => 'Show Video',
         'inputs' => [
             'project_id' => 'Project',
-            'path' => 'Path',
-            'thumbnail' => 'Thumbnail',
-            'position_id' => 'Position',
+            'desktop_path' => 'Desktop Path',
+            'desktop_thumbnail' => 'Desktop Thumbnail',
             'is_main' => 'Is Main',
-        ],
-    ],
-
-    'interacts' => [
-        'name' => 'Interacts',
-        'index_title' => 'Interacts List',
-        'new_title' => 'New Interact',
-        'create_title' => 'Create Interact',
-        'edit_title' => 'Edit Interact',
-        'show_title' => 'Show Interact',
-        'inputs' => [
-            'video_id' => 'Video',
-            'link_to' => 'Interact With',
-            'content' => 'Content',
-            'position_id' => 'Position',
-        ],
-    ],
-
-    'positions' => [
-        'name' => 'Positions',
-        'index_title' => 'Positions List',
-        'new_title' => 'New Position',
-        'create_title' => 'Create Position',
-        'edit_title' => 'Edit Position',
-        'show_title' => 'Show Position',
-        'inputs' => [
-            'x' => 'X',
-            'y' => 'Y',
-            'zindex' => 'Zindex',
-            'type' => 'Type',
         ],
     ],
 
@@ -91,6 +60,19 @@ return [
             'name' => 'Name',
             'email' => 'Email',
             'password' => 'Password',
+        ],
+    ],
+
+    'interactions' => [
+        'name' => 'Interactions',
+        'index_title' => 'Interactions List',
+        'new_title' => 'New Interaction',
+        'create_title' => 'Create Interaction',
+        'edit_title' => 'Edit Interaction',
+        'show_title' => 'Show Interaction',
+        'inputs' => [
+            'delay' => 'Delay',
+            'position' => 'Position',
         ],
     ],
 

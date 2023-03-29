@@ -20,8 +20,7 @@ class DatabaseSeeder extends Seeder
             ]);
         $this->call(PermissionsSeeder::class);
 
-        $this->call(InteractSeeder::class);
-        $this->call(PositionSeeder::class);
+        $this->call(InteractionSeeder::class);
         $this->call(ProjectSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(VideoSeeder::class);

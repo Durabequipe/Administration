@@ -37,7 +37,7 @@ class VideoInteractsTest extends TestCase
         $interacts = Interact::factory()
             ->count(2)
             ->create([
-                'link_to' => $video->id,
+                'video_id' => $video->id,
             ]);
 
         $response = $this->getJson(route('api.videos.interacts.index', $video));
@@ -53,7 +53,7 @@ class VideoInteractsTest extends TestCase
         $video = Video::factory()->create();
         $data = Interact::factory()
             ->make([
-                'link_to' => $video->id,
+                'video_id' => $video->id,
             ])
             ->toArray();
 
@@ -68,6 +68,6 @@ class VideoInteractsTest extends TestCase
 
         $interact = Interact::latest('id')->first();
 
-        $this->assertEquals($video->id, $interact->link_to);
+        $this->assertEquals($video->id, $interact->video_id);
     }
 }

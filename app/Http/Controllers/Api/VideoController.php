@@ -32,9 +32,9 @@ class VideoController extends Controller
         $this->authorize('create', Video::class);
 
         $validated = $request->validated();
-        if ($request->hasFile('thumbnail')) {
-            $validated['thumbnail'] = $request
-                ->file('thumbnail')
+        if ($request->hasFile('desktop_thumbnail')) {
+            $validated['desktop_thumbnail'] = $request
+                ->file('desktop_thumbnail')
                 ->store('public');
         }
 
@@ -58,13 +58,13 @@ class VideoController extends Controller
 
         $validated = $request->validated();
 
-        if ($request->hasFile('thumbnail')) {
-            if ($video->thumbnail) {
-                Storage::delete($video->thumbnail);
+        if ($request->hasFile('desktop_thumbnail')) {
+            if ($video->desktop_thumbnail) {
+                Storage::delete($video->desktop_thumbnail);
             }
 
-            $validated['thumbnail'] = $request
-                ->file('thumbnail')
+            $validated['desktop_thumbnail'] = $request
+                ->file('desktop_thumbnail')
                 ->store('public');
         }
 
@@ -77,8 +77,8 @@ class VideoController extends Controller
     {
         $this->authorize('delete', $video);
 
-        if ($video->thumbnail) {
-            Storage::delete($video->thumbnail);
+        if ($video->desktop_thumbnail) {
+            Storage::delete($video->desktop_thumbnail);
         }
 
         $video->delete();

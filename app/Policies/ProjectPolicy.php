@@ -11,66 +11,141 @@ class ProjectPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the project can view any models.
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('list projects');
+        return $user->can('view_any_project');
     }
 
     /**
-     * Determine whether the project can view the model.
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Project $model): bool
+    public function view(User $user, Project $project)
     {
-        return $user->hasPermissionTo('view projects');
+        return $user->can('view_project') && $user->projects()->where('project_id', $project->id)->exists();
     }
 
     /**
-     * Determine whether the project can create models.
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user): bool
+    public function create(User $user)
     {
-        return $user->hasPermissionTo('create projects');
+        return $user->can('create_project');
     }
 
     /**
-     * Determine whether the project can update the model.
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Project $model): bool
+    public function update(User $user, Project $project)
     {
-        return $user->hasPermissionTo('update projects');
+        return $user->can('update_project');
     }
 
     /**
-     * Determine whether the project can delete the model.
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Project $model): bool
+    public function delete(User $user, Project $project)
     {
-        return $user->hasPermissionTo('delete projects');
+        return $user->can('delete_project');
     }
 
     /**
-     * Determine whether the user can delete multiple instances of the model.
+     * Determine whether the user can bulk delete.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user): bool
+    public function deleteAny(User $user)
     {
-        return $user->hasPermissionTo('delete projects');
+        return $user->can('delete_any_project');
     }
 
     /**
-     * Determine whether the project can restore the model.
+     * Determine whether the user can permanently delete.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Project $model): bool
+    public function forceDelete(User $user, Project $project)
     {
-        return false;
+        return $user->can('force_delete_project');
     }
 
     /**
-     * Determine whether the project can permanently delete the model.
+     * Determine whether the user can permanently bulk delete.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Project $model): bool
+    public function forceDeleteAny(User $user)
     {
-        return false;
+        return $user->can('force_delete_any_project');
     }
+
+    /**
+     * Determine whether the user can restore.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Project $project)
+    {
+        return $user->can('restore_project');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restoreAny(User $user)
+    {
+        return $user->can('restore_any_project');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function replicate(User $user, Project $project)
+    {
+        return $user->can('replicate_project');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function reorder(User $user)
+    {
+        return $user->can('reorder_project');
+    }
+
 }

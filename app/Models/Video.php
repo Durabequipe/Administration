@@ -15,10 +15,12 @@ class Video extends Model
 
     protected $fillable = [
         'project_id',
-        'path',
-        'thumbnail',
-        'position_id',
+        'desktop_path',
+        'mobile_path',
+        'desktop_thumbnail',
+        'mobile_thumbnail',
         'is_main',
+        'interaction_id',
     ];
 
     protected $searchableFields = ['*'];
@@ -32,18 +34,18 @@ class Video extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function interacts()
+    public function interaction()
     {
-        return $this->hasMany(Interact::class);
+        return $this->belongsTo(Interaction::class);
     }
 
-    public function position()
+    public function adjacents()
     {
-        return $this->belongsTo(Position::class);
+        return $this->belongsToMany(Video::class, 'adjacents_videos', 'video_id', 'adjacent_id')->withPivot('content');
     }
 
-    public function interactWiths()
+    public function videos()
     {
-        return $this->hasMany(Interact::class, 'link_to');
+        return $this->belongsToMany(Video::class, 'adjacents_videos');
     }
 }

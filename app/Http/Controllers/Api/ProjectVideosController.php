@@ -30,15 +30,14 @@ class ProjectVideosController extends Controller
         $this->authorize('create', Video::class);
 
         $validated = $request->validate([
-            'path' => ['required', 'max:255', 'string'],
-            'thumbnail' => ['nullable', 'file'],
-            'position_id' => ['required', 'exists:positions,id'],
-            'is_main' => ['required', 'boolean'],
+            'desktop_path' => ['required', 'max:255', 'string'],
+            'desktop_thumbnail' => ['image', 'max:1024', 'nullable'],
+            'is_main' => ['nullable', 'boolean'],
         ]);
 
-        if ($request->hasFile('thumbnail')) {
-            $validated['thumbnail'] = $request
-                ->file('thumbnail')
+        if ($request->hasFile('desktop_thumbnail')) {
+            $validated['desktop_thumbnail'] = $request
+                ->file('desktop_thumbnail')
                 ->store('public');
         }
 

@@ -25,26 +25,18 @@
                     </div>
                     <div class="mb-4">
                         <h5 class="font-medium text-gray-700">
-                            @lang('crud.videos.inputs.path')
+                            @lang('crud.videos.inputs.desktop_path')
                         </h5>
-                        <span>{{ $video->path ?? '-' }}</span>
+                        <span>{{ $video->desktop_path ?? '-' }}</span>
                     </div>
                     <div class="mb-4">
                         <h5 class="font-medium text-gray-700">
-                            @lang('crud.videos.inputs.thumbnail')
+                            @lang('crud.videos.inputs.desktop_thumbnail')
                         </h5>
                         <x-partials.thumbnail
-                            src="{{ $video->thumbnail ? \Storage::url($video->thumbnail) : '' }}"
+                            src="{{ $video->desktop_thumbnail ? \Storage::url($video->desktop_thumbnail) : '' }}"
                             size="150"
                         />
-                    </div>
-                    <div class="mb-4">
-                        <h5 class="font-medium text-gray-700">
-                            @lang('crud.videos.inputs.position_id')
-                        </h5>
-                        <span
-                            >{{ optional($video->position)->type ?? '-' }}</span
-                        >
                     </div>
                     <div class="mb-4">
                         <h5 class="font-medium text-gray-700">

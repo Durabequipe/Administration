@@ -53,7 +53,10 @@ class ProjectResource extends Resource
 
     public static function getRelations(): array
     {
-        return [ProjectResource\RelationManagers\VideosRelationManager::class];
+        return [
+            ProjectResource\RelationManagers\VideosRelationManager::class,
+            ProjectResource\RelationManagers\UsersRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

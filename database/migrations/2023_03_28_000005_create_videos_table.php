@@ -13,10 +13,18 @@ return new class extends Migration {
         Schema::create('videos', function (Blueprint $table) {
             $table->id('id');
             $table->uuid('project_id');
-            $table->string('path');
-            $table->string('thumbnail')->nullable();
-            $table->unsignedBigInteger('position_id');
-            $table->boolean('is_main')->default(false);
+            $table->string('desktop_path');
+            $table->string('mobile_path');
+            $table->string('desktop_thumbnail')->nullable();
+            $table->string('mobile_thumbnail')->nullable();
+            $table
+                ->boolean('is_main')
+                ->default(false)
+                ->nullable();
+            $table
+                ->unsignedBigInteger('interaction_id')
+                ->default(1)
+                ->nullable();
 
             $table->timestamps();
             $table->softDeletes();
