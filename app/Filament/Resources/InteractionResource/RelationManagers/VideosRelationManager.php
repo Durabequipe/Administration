@@ -19,7 +19,7 @@ class VideosRelationManager extends RelationManager
 {
     protected static string $relationship = 'videos';
 
-    protected static ?string $recordTitleAttribute = 'desktop_path';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {

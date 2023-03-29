@@ -30,6 +30,7 @@ class PlayerResource extends JsonResource
                         "popupDuration" => 5,
                         "text" => "Quel est le nom de ce personnage ?",
                         "interactions" => $video->adjacents->map(fn ($adjacent) => [
+                            "id" => $adjacent->id,
                             "content" => $adjacent->pivot->content,
                             "videosPaths" => [
                                 $adjacent->desktop_path,

@@ -11,8 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('videos', function (Blueprint $table) {
-            $table->id('id');
+            $table->uuid('id')->primary();
             $table->uuid('project_id');
+            $table->string('name');
             $table->string('desktop_path');
             $table->string('mobile_path');
             $table->string('desktop_thumbnail')->nullable();

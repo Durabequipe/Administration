@@ -23,6 +23,7 @@ class VideoFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => $this->faker->name(),
             'desktop_path' => $this->faker->text(255),
             'mobile_path' => $this->faker->text(255),
             'mobile_thumbnail' => $this->faker->text(255),

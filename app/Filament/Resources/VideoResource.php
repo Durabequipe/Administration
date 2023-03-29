@@ -41,7 +41,6 @@ class VideoResource extends Resource
                         ]),
 
                     FileUpload::make('desktop_path')
-                        ->rules(['file'])
                         ->required()
                         ->placeholder('Desktop Path')
                         ->columnSpan([
@@ -61,8 +60,7 @@ class VideoResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('mobile_path')
-                        ->rules(['max:255', 'string'])
+                    FileUpload::make('mobile_path')
                         ->required()
                         ->placeholder('Mobile Path')
                         ->columnSpan([
@@ -104,19 +102,11 @@ class VideoResource extends Resource
                 Tables\Columns\TextColumn::make('project.name')
                     ->toggleable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('desktop_path')
+                Tables\Columns\TextColumn::make('name')
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
 
-                Tables\Columns\TextColumn::make('mobile_path')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-
-                Tables\Columns\ImageColumn::make('thumbnail')
-                    ->toggleable()
-                    ->circular(),
                 Tables\Columns\IconColumn::make('is_main')
                     ->toggleable()
                     ->boolean(),

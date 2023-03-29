@@ -67,6 +67,7 @@ class VideoControllerTest extends TestCase
 
         $response = $this->post(route('videos.store'), $data);
 
+        unset($data['name']);
         unset($data['mobile_path']);
         unset($data['mobile_thumbnail']);
         unset($data['interaction_id']);
@@ -120,16 +121,19 @@ class VideoControllerTest extends TestCase
 
         $data = [
             'project_id' => $this->faker->uuid,
+            'name' => $this->faker->name(),
             'desktop_path' => $this->faker->text(255),
             'mobile_path' => $this->faker->text(255),
             'mobile_thumbnail' => $this->faker->text(255),
             'is_main' => $this->faker->boolean,
+            'interaction_id' => $this->faker->randomNumber,
             'project_id' => $project->id,
             'interaction_id' => $interaction->id,
         ];
 
         $response = $this->put(route('videos.update', $video), $data);
 
+        unset($data['name']);
         unset($data['mobile_path']);
         unset($data['mobile_thumbnail']);
         unset($data['interaction_id']);

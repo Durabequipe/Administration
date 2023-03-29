@@ -3,18 +3,23 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Video extends Model
 {
+    use HasUuids;
     use HasFactory;
     use Searchable;
     use SoftDeletes;
 
     protected $fillable = [
         'project_id',
+        'name',
         'desktop_path',
         'mobile_path',
         'desktop_thumbnail',
@@ -47,5 +52,21 @@ class Video extends Model
     public function videos()
     {
         return $this->belongsToMany(Video::class, 'adjacents_videos');
+    }
+
+    public function desktopPath() : Attribute
+    {
+        return Attribute::make(
+            get: fn () => url(Storage::disk('videos')->url($this->attributes['desktop_path'])),
+            set: fn ($value) => $this->attributes['desktop_path'] = $value
+        );
+    }
+
+    public function mobilePath() : Attribute
+    {
+        return Attribute::make(
+            get: fn () => url(Storage::disk('videos')->url($this->attributes['mobile_path'])),
+            set: fn ($value) => $this->attributes['mobile_path'] = $value
+        );
     }
 }

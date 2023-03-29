@@ -25,11 +25,17 @@ class VideosRelationManager extends RelationManager
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
+                TextInput::make('name')
+                    ->rules(['max:255', 'string'])
+                    ->placeholder('Name')
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 12,
+                    ]),
                 FileUpload::make('desktop_path')
-                    ->rules(['file'])
-                    ->placeholder('Desktop video')
-                    ->disk('public')
-                    ->directory('videos')
+                    ->placeholder('Desktop video path')
+                    ->disk('videos')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -46,9 +52,8 @@ class VideosRelationManager extends RelationManager
                         'lg' => 12,
                     ]),
 
-                TextInput::make('mobile_path')
-                    ->rules(['max:255', 'string'])
-                    ->placeholder('Mobile Path')
+                FileUpload::make('mobile_path')
+                    ->placeholder('Mobile video path')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -82,7 +87,7 @@ class VideosRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('project.name')->limit(50),
-                Tables\Columns\TextColumn::make('desktop_path')->limit(50),
+                Tables\Columns\TextColumn::make('name')->limit(50),
                 Tables\Columns\ImageColumn::make(
                     'desktop_thumbnail'
                 )->rounded(),

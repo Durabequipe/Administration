@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('interactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->integer('delay');
             $table->string('position');
 

@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('adjacents_videos', function (Blueprint $table) {
-            $table->unsignedBigInteger('video_id');
-            $table->unsignedBigInteger('adjacent_id');
+            $table->uuid('video_id');
+            $table->uuid('adjacent_id');
             $table->text('content');
         });
     }

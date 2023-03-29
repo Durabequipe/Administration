@@ -44,7 +44,7 @@ class ProjectVideosTest extends TestCase
             route('api.projects.videos.index', $project)
         );
 
-        $response->assertOk()->assertSee($videos[0]->desktop_path);
+        $response->assertOk()->assertSee($videos[0]->name);
     }
 
     /**
@@ -64,6 +64,7 @@ class ProjectVideosTest extends TestCase
             $data
         );
 
+        unset($data['name']);
         unset($data['mobile_path']);
         unset($data['mobile_thumbnail']);
         unset($data['interaction_id']);

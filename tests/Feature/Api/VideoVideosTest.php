@@ -39,7 +39,7 @@ class VideoVideosTest extends TestCase
 
         $response = $this->getJson(route('api.videos.videos.index', $video));
 
-        $response->assertOk()->assertSee($video->desktop_path);
+        $response->assertOk()->assertSee($video->name);
     }
 
     /**
