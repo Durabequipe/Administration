@@ -25,9 +25,11 @@ class VideosRelationManager extends RelationManager
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
-                TextInput::make('desktop_path')
-                    ->rules(['max:255', 'string'])
-                    ->placeholder('Desktop Path')
+                FileUpload::make('desktop_path')
+                    ->rules(['file'])
+                    ->placeholder('Desktop video')
+                    ->disk('public')
+                    ->directory('videos')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,

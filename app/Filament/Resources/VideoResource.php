@@ -40,8 +40,8 @@ class VideoResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('desktop_path')
-                        ->rules(['max:255', 'string'])
+                    FileUpload::make('desktop_path')
+                        ->rules(['file'])
                         ->required()
                         ->placeholder('Desktop Path')
                         ->columnSpan([
