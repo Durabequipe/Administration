@@ -74,5 +74,6 @@ class PermissionsSeeder extends Seeder
         if ($user) {
             $user->assignRole($adminRole);
         }
+
     }
 }
