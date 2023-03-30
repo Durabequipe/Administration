@@ -10,13 +10,6 @@
     <script type="module">
         window.ds.subscribe("callback", (object) => {
             for (const button of object.items) {
-                console.log(object);
-                console.log(
-                    "Button " + button.id + " moved to :",
-                    object.event.x,
-                    object.event.y
-                );
-
                 Livewire.emit('moveCard', button.id, object.event.x, object.event.y);
             }
         });

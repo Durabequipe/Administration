@@ -16,6 +16,8 @@ class VideosRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected bool $allowsDuplicates = true;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -37,8 +39,9 @@ class VideosRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('project.name')->limit(50),
-                Tables\Columns\IconColumn::make('name'),
-                Tables\Columns\TextColumn::make('is_main'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('content')
+
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
