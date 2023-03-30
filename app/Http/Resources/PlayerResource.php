@@ -20,6 +20,7 @@ class PlayerResource extends JsonResource
             'entrypointId' => $this->mainVideo->id,
             'videos' => $this->videos->map(fn(Video $video) => [
                 "id" => $video->id,
+                'name' => $video->name,
                 "paths" => [
                     $video->desktop_path,
                     $video->mobile_path
