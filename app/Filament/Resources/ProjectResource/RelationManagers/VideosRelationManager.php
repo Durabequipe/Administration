@@ -140,6 +140,16 @@ class VideosRelationManager extends RelationManager
                         'lg' => 12,
                     ]),
 
+                TextInput::make('interaction_title')
+                    ->label('Interaction Title')
+                    ->rules(['max:255', 'string'])
+                    ->placeholder('Interaction Title')
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 12,
+                    ]),
+
                 Forms\Components\Select::make('interaction_id')
                     ->relationship('interaction', 'id')
                     ->placeholder('Select an interaction')
@@ -149,7 +159,7 @@ class VideosRelationManager extends RelationManager
                         'lg' => 12,
                     ])
                     ->getOptionLabelFromRecordUsing(function (Interaction $record) {
-                        return $record->title . " | " . $record->delay . ' sec. - ' . $record->position;
+                        return $record->delay . ' sec. - ' . $record->position;
                     })
                     ->createOptionForm([
                         Forms\Components\TextInput::make('delay')

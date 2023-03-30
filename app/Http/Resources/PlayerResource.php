@@ -27,7 +27,7 @@ class PlayerResource extends JsonResource
                 ],
                 "interactionPosition" => $video->interaction->position,
                 "popupDuration" => $video->interaction->delay,
-                "text" => $video->interaction->title,
+                "text" => $video->interaction_title,
                 "interactions" => $video->adjacents->map(fn($adjacent) => [
                     "id" => $adjacent->id,
                     "content" => $adjacent->pivot->content,

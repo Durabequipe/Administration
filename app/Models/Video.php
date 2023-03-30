@@ -26,6 +26,7 @@ class Video extends Model
         'mobile_thumbnail',
         'is_main',
         'interaction_id',
+        'interaction_title',
         'position_x',
         'position_y',
     ];

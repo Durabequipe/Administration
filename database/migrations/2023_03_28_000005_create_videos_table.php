@@ -27,6 +27,10 @@ return new class extends Migration {
                 ->default(1)
                 ->nullable();
 
+            $table->string('interaction_title')->nullable();
+            $table->integer('position_x')->nullable()->default(0);
+            $table->integer('position_y')->nullable()->default(0);
+
             $table->timestamps();
             $table->softDeletes();
         });
