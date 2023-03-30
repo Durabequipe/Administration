@@ -26,10 +26,9 @@ class PlayerResource extends JsonResource
                     $video->mobile_path
                 ],
                 "interaction" => [
-                    "id" => $video->interaction->id,
                     "title" => $video->interaction_title,
                     "position" => $video->interaction->position,
-                    "delay" => $video->interaction->delay,
+                    "duration" => $video->interaction->delay,
                 ],
                 "interactions" => $video->adjacents->map(fn($adjacent) => [
                     "id" => $adjacent->id,
