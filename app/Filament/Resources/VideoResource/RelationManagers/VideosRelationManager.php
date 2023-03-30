@@ -3,17 +3,12 @@
 namespace App\Filament\Resources\VideoResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Tables;
-use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Tables\Filters\MultiSelectFilter;
+use Filament\Resources\{Form, Table};
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Filters\MultiSelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class VideosRelationManager extends RelationManager
 {
@@ -42,7 +37,8 @@ class VideosRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('project.name')->limit(50),
-                Tables\Columns\IconColumn::make('is_main'),
+                Tables\Columns\IconColumn::make('name'),
+                Tables\Columns\TextColumn::make('is_main'),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
