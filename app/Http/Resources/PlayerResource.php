@@ -25,9 +25,9 @@ class PlayerResource extends JsonResource
                     $video->desktop_path,
                     $video->mobile_path
                 ],
-                "interactionPosition" => "FULL",
-                "popupDuration" => 5,
-                "text" => "Quel est le nom de ce personnage ?",
+                "interactionPosition" => $video->interaction->position,
+                "popupDuration" => $video->interaction->delay,
+                "text" => $video->interaction->title,
                 "interactions" => $video->adjacents->map(fn($adjacent) => [
                     "id" => $adjacent->id,
                     "content" => $adjacent->pivot->content,

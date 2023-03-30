@@ -22,6 +22,11 @@ class Board extends Component
 
     public function moveCard(Video $video, $positionX, $positionY)
     {
-        dd('moveCard', $positionX, $positionY, $video);
+        $video->update([
+            'position_x' => $positionX,
+            'position_y' => $positionY,
+        ]);
+
+        $this->videos = Video::all();
     }
 }

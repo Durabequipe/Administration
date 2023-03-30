@@ -26,6 +26,8 @@ class Video extends Model
         'mobile_thumbnail',
         'is_main',
         'interaction_id',
+        'position_x',
+        'position_y',
     ];
 
     protected $searchableFields = ['*'];
