@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "dragselect": "^2.7.3"
+        "dragselect": "^2.7.3",
+        "jointjs": "^3.6.5"
     }
 }

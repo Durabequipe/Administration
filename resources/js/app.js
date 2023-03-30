@@ -2,10 +2,11 @@ import './bootstrap';
 
 import Alpine from 'alpinejs';
 
-import {ds} from './dragselect';
+import * as joint from 'jointjs';
+
 
 window.Alpine = Alpine;
 
 Alpine.start();
 
-window.ds = ds;
+window.joint = joint;

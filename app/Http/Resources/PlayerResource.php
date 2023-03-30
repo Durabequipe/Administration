@@ -25,7 +25,7 @@ class PlayerResource extends JsonResource
                     $video->desktop_path,
                     $video->mobile_path
                 ],
-                "interaction" => [
+                "animation" => [
                     "title" => $video->interaction_title,
                     "position" => $video->interaction->position,
                     "duration" => $video->interaction->delay,
