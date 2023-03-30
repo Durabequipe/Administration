@@ -2,7 +2,7 @@
     <div class="draggable-area">
         <div style="height: calc(100vh - 4rem);" id="area">
             @foreach($videos as $i => $video)
-                @include('includes.Builder.Card', ['title' => 'Card '. $i, 'id' => $video->id])
+                @include('includes.Builder.Card', ['title' => $video->name, 'id' => $video->id])
             @endforeach
         </div>
     </div>
