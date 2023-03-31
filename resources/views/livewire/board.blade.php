@@ -25,60 +25,93 @@
             },
         });
 
-        let rect = new joint.shapes.standard.Rectangle();
-        rect.position(100, 30);
-        rect.resize(100, 40);
-        rect.attr({
-            video: {
-                id: "1234",
-            },
-            body: {
-                fill: "blue",
-            },
-            label: {
-                text: "Hello",
-                fill: "white",
-            },
-        });
-        rect.addTo(graph);
+        @foreach($videos as $video)
+        new joint.shapes.standard.Rectangle()
+            .position({{ $video->position_x  }}, {{ $video->position_y }})
+            .resize(100, 40)
+            .attr({
+                video: {
+                    id: "{{$video->id}}",
+                },
+                links: @json($video->adjacents->pluck('id')->toArray()),
+                body: {
+                    fill: "blue",
+                },
+                label: {
+                    text: "{{$video->name}}",
+                    fill: "white",
+                },
+            })
+            .addTo(graph);
+        @endforeach
 
-        let rect2 = new joint.shapes.standard.Rectangle();
-        rect2.position(400, 200);
-        rect2.resize(100, 40);
-        rect2.attr({
-            video: {
-                id: "4321",
-            },
-            body: {
-                fill: "blue",
-            },
-            label: {
-                text: "Hello",
-                fill: "white",
-            },
+        graph.getElements().forEach((element) => {
+            element.attributes.attrs.links.forEach((link) => {
+                let linkElement = new joint.shapes.standard.Link();
+                linkElement.source(element);
+                linkElement.target(getElementByVideoID(link));
+                linkElement.addTo(graph);
+            });
         });
-        rect2.addTo(graph);
-
-        let link = new joint.shapes.standard.Link();
-        link.source(rect);
-        link.target(rect2);
-        link.addTo(graph);
 
 
     </script>
 
     <script>
-        function save() {
+        async function save() {
             window.graph.getElements().forEach((element) => {
                 console.log(
                     element.attributes.attrs.video.id,
-                    element.attributes.position
+                    element.attributes.position,
+                    element.attributes
                 );
+                window.livewire.emit('moveCard', element.attributes.attrs.video.id, element.attributes.position.x, element.attributes.position.y)
+
+            });
+            await refresh();
+        }
+
+        async function addLink() {
+            console.log("Waiting for click...");
+            await waitForClick();
+            let click2 = await waitForClick();
+            let click3 = await waitForClick();
+
+            let video1 = window.graph.getCell(click2.target.parentNode.getAttribute('model-id'));
+            let video2 = window.graph.getCell(click3.target.parentNode.getAttribute('model-id'));
+
+            let video1ID = video1.attributes.attrs.video.id;
+            let video2ID = video2.attributes.attrs.video.id;
+
+            await window.livewire.emit('addLink', video1ID, video2ID);
+
+            await refresh();
+
+        }
+
+        async function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function refresh() {
+            await delay(50);
+            window.location.reload();
+        }
+
+        async function waitForClick() {
+            return new Promise(resolve => {
+                document.addEventListener('click', function onClick(event) {
+                    document.removeEventListener('click', onClick);
+                    resolve(event);
+                });
             });
         }
 
-        function addLink() {
 
+        function getElementByVideoID(videoID) {
+            return window.graph.getElements().find((element) => {
+                return element.attributes.attrs.video.id === videoID;
+            });
         }
     </script>
 

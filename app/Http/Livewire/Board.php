@@ -8,7 +8,7 @@ use Livewire\Component;
 class Board extends Component
 {
     public $videos = [];
-    protected $listeners = ['moveCard' => 'moveCard'];
+    protected $listeners = ['moveCard' => 'moveCard', 'addLink' => 'addLink'];
 
     public function mount()
     {
@@ -26,6 +26,13 @@ class Board extends Component
             'position_x' => $positionX,
             'position_y' => $positionY,
         ]);
+
+        $this->videos = Video::all();
+    }
+
+    public function addLink(Video $video1, Video $video2)
+    {
+        $video1->adjacents()->attach($video2);
 
         $this->videos = Video::all();
     }
