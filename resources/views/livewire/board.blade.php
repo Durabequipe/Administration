@@ -68,6 +68,7 @@
                 window.livewire.emit('moveCard', element.attributes.attrs.video.id, element.attributes.position.x, element.attributes.position.y)
 
             });
+
             await refresh();
         }
 
@@ -86,7 +87,6 @@
             await window.livewire.emit('addLink', video1ID, video2ID);
 
             await refresh();
-
         }
 
         async function delay(ms) {
@@ -94,7 +94,7 @@
         }
 
         async function refresh() {
-            await delay(50);
+            await delay(200);
             window.location.reload();
         }
 

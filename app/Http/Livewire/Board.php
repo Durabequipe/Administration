@@ -28,12 +28,14 @@ class Board extends Component
         ]);
 
         $this->videos = Video::all();
+
+        $this->emit('refresh');
     }
 
     public function addLink(Video $video1, Video $video2)
     {
         $video1->adjacents()->attach($video2);
 
-        $this->videos = Video::all();
+        $this->dispatchBrowserEvent('refresh');
     }
 }
