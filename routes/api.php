@@ -1,21 +1,20 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\InteractionController;
+use App\Http\Controllers\Api\InteractionVideosController;
+use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\PlayerController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\ProjectUsersController;
+use App\Http\Controllers\Api\ProjectVideosController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserProjectsController;
+use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\Api\VideoInteractsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\VideoController;
-use App\Http\Controllers\Api\ProjectController;
-use App\Http\Controllers\Api\InteractController;
-use App\Http\Controllers\Api\PermissionController;
-use App\Http\Controllers\Api\InteractionController;
-use App\Http\Controllers\Api\ProjectUsersController;
-use App\Http\Controllers\Api\UserProjectsController;
-use App\Http\Controllers\Api\ProjectVideosController;
-use App\Http\Controllers\Api\VideoInteractsController;
-use App\Http\Controllers\Api\InteractionVideosController;
-use \App\Http\Controllers\Api\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,5 +119,6 @@ Route::name('api.')
 
         //Player
 
-        Route::get('/player/{project}', [PlayerController::class, 'index'])->name('player');
     });
+
+Route::get('/player/{project}', [PlayerController::class, 'index'])->name('player');
