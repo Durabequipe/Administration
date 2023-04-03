@@ -1,6 +1,7 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
 import {CONNECTION, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
+import {BezierConnector} from "@jsplumb/connector-bezier";
 
 
 const instance = jsPlumbBrowserUI.newInstance({
@@ -9,16 +10,20 @@ const instance = jsPlumbBrowserUI.newInstance({
         containment: "parent",
         containmentPadding: 10
     },
-    connectionsDetachable: false
 });
 
 instance.importDefaults({
-    //connector: FlowchartConnector.type,
+    connector: BezierConnector.type,
     overlays: [
         {type: "Arrow", options: {location: 1}}
     ],
+    anchors: [
+        AnchorLocations.AutoDefault,
+        AnchorLocations.AutoDefault,
+        AnchorLocations.AutoDefault,
+        AnchorLocations.AutoDefault
+    ],
     maxConnections: 4,
-    anchor: AnchorLocations.AutoDefault,
 
 });
 
@@ -29,7 +34,7 @@ for (const video of videos) {
     for (const position of ['Top', 'Right', 'Bottom', 'Left']) {
         instance.addEndpoint(video, {
             endpoint: "Dot",
-            anchor: AnchorLocations.AutoDefault,
+            anchor: position,
             source: true,
             target: true,
         });
@@ -42,7 +47,15 @@ for (const video of videos) {
             source: video,
             target: document.getElementById(`video-${link.id}`),
             overlays: [
-                {type: "Arrow", options: {location: 1}}
+                {type: "Arrow", options: {location: 1}},
+                {
+                    type: "Label", options: {
+                        label: link.content,
+                        location: 0.5,
+                        cssClass: "bg-white text-black p-1 rounded z-10",
+                    }
+                }
+
             ],
 
         });

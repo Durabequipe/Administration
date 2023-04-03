@@ -13,7 +13,11 @@
                  "id"=> $adjacent->id,
                  "content" =>$adjacent->pivot->content,
              ])) }}"
-            class="node video-{{ $video->id }} flex bg-indigo-50 justify-center w-24 h-24 items-center absolute"
+            @class([
+                'bg-green-500' => $video->is_main,
+                'bg-indigo-50' => !$video->is_main,
+                "node video-{{ $video->id }} flex justify-center w-24 h-24 items-center absolute" => true,
+            ])
             style="left: {{ $video->position_x }}px; top: {{ $video->position_y }}px;">
             {{ $video->name  }}
         </div>
