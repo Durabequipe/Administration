@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@jsplumb/browser-ui": "^5.13.7",
         "dragselect": "^2.7.3",
         "jointjs": "^3.6.5"
     }

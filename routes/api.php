@@ -122,3 +122,4 @@ Route::name('api.')
     });
 
 Route::get('/player/{project}', [PlayerController::class, 'index'])->name('player');
+Route::get('/projectsIds', [ProjectController::class, 'getProjectsIds'])->name('projectsIds');

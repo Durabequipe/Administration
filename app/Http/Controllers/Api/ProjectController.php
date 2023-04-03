@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProjectResource;
-use App\Http\Resources\ProjectCollection;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Requests\ProjectUpdateRequest;
+use App\Http\Resources\ProjectCollection;
+use App\Http\Resources\ProjectResource;
+use App\Models\Project;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProjectController extends Controller
 {
@@ -64,5 +65,12 @@ class ProjectController extends Controller
         $project->delete();
 
         return response()->noContent();
+    }
+
+    public function getProjectsIds(): JsonResponse
+    {
+        $ids = Project::pluck('id');
+
+        return response()->json($ids);
     }
 }
