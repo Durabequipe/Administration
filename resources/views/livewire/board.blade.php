@@ -1,7 +1,13 @@
+@php use App\Forms\UserForm; @endphp
 <div id="buttons-area">
     <button onclick="save()">Save</button>
     <button onclick="addLink()">Add Link</button>
 </div>
+
+<x-tall-interactive::modal
+    id="set-content-link"
+    :form="UserForm::class"
+/>
 
 <div id="builder-area" style="width: 100%; height: 90%; background-color: orange">
 

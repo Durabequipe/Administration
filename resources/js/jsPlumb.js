@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_ELEMENT_CLICK, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -55,9 +55,7 @@ for (const video of videos) {
                         cssClass: "bg-white text-black p-1 rounded z-10",
                     }
                 }
-
             ],
-
         });
     }
 }
@@ -70,5 +68,12 @@ instance.bind(CONNECTION, (params) => {
 instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
     const position = instance.getOffset(element);
     const id = element.dataset.videoId;
-    Livewire.emit('moveCard', id, position.x, position.y);
+    if (id !== undefined) {
+        Livewire.emit('moveCard', id, position.x, position.y);
+    }
+});
+
+instance.bind(EVENT_ELEMENT_CLICK, (params) => {
+    console.log(params);
+    Livewire.emit('modal:open', 'set-content-link');
 });
