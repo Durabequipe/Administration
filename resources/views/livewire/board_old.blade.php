@@ -1,4 +1,4 @@
-@php use App\Forms\UserForm; @endphp
+@php use App\Forms\SetContentLinkForm; @endphp
 <div>
     <div id="buttons-area">
         <button onclick="save()">Save</button>
@@ -6,7 +6,7 @@
     </div>
     <x-tall-interactive::modal
         id="create-user"
-        :form="UserForm::class"
+        :form="SetContentLinkForm::class"
     />
     <button onclick="openModal('create-user')" type="button" class="">
         Open Modal

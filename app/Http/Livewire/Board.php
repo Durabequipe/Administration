@@ -34,8 +34,6 @@ class Board extends Component
 
     public function addLink(Video $video1, Video $video2)
     {
-        $video1->adjacents()->attach($video2);
-
-        $this->dispatchBrowserEvent('refresh');
+        $this->emit('modal:open', 'set-content-link', ['video1' => $video1, 'video2' => $video2]);
     }
 }

@@ -1,4 +1,4 @@
-@php use App\Forms\UserForm; @endphp
+@php use App\Forms\SetContentLinkForm; @endphp
 <div id="buttons-area">
     <button onclick="save()">Save</button>
     <button onclick="addLink()">Add Link</button>
@@ -6,7 +6,7 @@
 
 <x-tall-interactive::modal
     id="set-content-link"
-    :form="UserForm::class"
+    :form="SetContentLinkForm::class"
 />
 
 <div id="builder-area" style="width: 100%; height: 90%; background-color: orange">

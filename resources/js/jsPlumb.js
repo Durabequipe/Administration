@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_ELEMENT_CLICK, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -73,7 +73,17 @@ instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
     }
 });
 
-instance.bind(EVENT_ELEMENT_CLICK, (params) => {
-    console.log(params);
-    Livewire.emit('modal:open', 'set-content-link');
+/*instance.bind(EVENT_ELEMENT_CLICK, (element) => {
+    console.log(element.getAttribute('jtk-overlay-id'));
+
+    //get the element in instance by id
+    const elements = instance.getManagedElements();
+    console.log(elements);
+
+    Livewire.emit('modal:open', 'set-content-link', element.dataset.videoId);
+});*/
+
+
+Livewire.on('refresh', () => {
+    instance.repaintEverything();
 });

@@ -6,7 +6,7 @@ module.exports = {
         './vendor/ralphjsmit/tall-interactive/resources/views/**/*.blade.php',
 
     ],
-    darkMode: false, // or 'media' or 'class'
+    darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {},
     },
