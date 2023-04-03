@@ -17,6 +17,8 @@
     },
     "dependencies": {
         "@jsplumb/browser-ui": "^5.13.7",
+        "@jsplumb/connector-bezier": "^5.13.7",
+        "@jsplumb/connector-flowchart": "^5.13.7",
         "dragselect": "^2.7.3",
         "jointjs": "^3.6.5"
     }
