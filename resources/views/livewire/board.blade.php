@@ -1,14 +1,13 @@
-<x-tall-interactive::modal
-    id="set-content-link"
-    :form="App\Forms\SetContentLinkForm::class"
-/>
+{{--@foreach($project->videos as $video)
+    <x-tall-interactive::modal
+        id="edit-video-{{ $video->id }}"
+        :form="App\Forms\VideoForm::class"
+        :video="$video"
+        :project="$project"
+        dismissable
+    />
 
-<x-tall-interactive::modal
-    id="add-video"
-    :form="App\Forms\AddVideoForm::class"
-    :project="$project"
-    dismissable
-/>
+@endforeach--}}
 
 <div id="builder-area" class="absolute w-screen h-screen bg-indigo-50">
 
@@ -33,7 +32,7 @@
 
     <div id="buttons-area" class="fixed flex bottom-10 w-screen justify-center">
         <div class="w-48 h-16 bg-indigo-100 flex justify-around rounded-3xl ">
-            <button id="save" class="p-2 border m-2" onclick="Livewire.emit('modal:open', 'add-video')">
+            <button id="save" class="p-2 border m-2" onclick="Livewire.emit('modal:open', 'video-form')">
                 Ajouter une vidéo
             </button>
         </div>
@@ -42,4 +41,15 @@
 
 </div>
 
+<x-tall-interactive::modal
+    id="set-content-link"
+    :form="App\Forms\SetContentLinkForm::class"
+/>
+
+<x-tall-interactive::modal
+    id="video-form"
+    :form="App\Forms\VideoForm::class"
+    :project="$project"
+    dismissable
+/>
 

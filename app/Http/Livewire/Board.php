@@ -28,19 +28,18 @@ class Board extends Component
             'position_y' => $positionY,
         ]);
 
-        $this->videos = Video::all();
-
-        $this->emit('refresh');
+        $this->dispatchBrowserEvent('refresh', 'Video saved!');
     }
 
     public function addLink(Video $video1, Video $video2)
     {
         $this->emit('modal:open', 'set-content-link', ['video1' => $video1, 'video2' => $video2]);
+
     }
 
     public function addVideo()
     {
-        $this->emit('modal:open', 'add-video');
+        $this->emit('modal:open', 'video-form');
     }
 
 }

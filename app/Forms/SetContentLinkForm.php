@@ -5,6 +5,7 @@ namespace App\Forms;
 use App\Models\Video;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
+use Livewire\Component;
 use RalphJSmit\Tall\Interactive\Forms\Form;
 
 class SetContentLinkForm extends Form
@@ -23,9 +24,12 @@ class SetContentLinkForm extends Form
         ];
     }
 
-    public function submit(Collection $state): void
+    public function submit(Collection $state, Component $livewire): void
     {
         Video::find($this->video1['id'])->adjacents()->attach($this->video2['id'], ['content' => $state->get('content')]);
+
+        $livewire->dispatchBrowserEvent('refresh', 'Video saved!');
+
     }
 
     public function mount(): void

@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_ELEMENT_CLICK, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -28,38 +28,7 @@ instance.importDefaults({
 });
 
 
-const videos = document.getElementsByClassName('node');
-
-for (const video of videos) {
-    for (const position of ['Top', 'Right', 'Bottom', 'Left']) {
-        instance.addEndpoint(video, {
-            endpoint: "Dot",
-            anchor: position,
-            source: true,
-            target: true,
-        });
-    }
-}
-
-for (const video of videos) {
-    for (const link of JSON.parse(video.dataset.links)) {
-        instance.connect({
-            source: video,
-            target: document.getElementById(`video-${link.id}`),
-            overlays: [
-                {type: "Arrow", options: {location: 1}},
-                {
-                    type: "Label", options: {
-                        label: link.content,
-                        location: 0.5,
-                        cssClass: "bg-white text-black p-1 rounded z-10",
-                    }
-                }
-            ],
-        });
-    }
-}
-
+drawEverything();
 
 instance.bind(CONNECTION, (params) => {
     Livewire.emit('addLink', params.source.dataset.videoId, params.target.dataset.videoId);
@@ -69,21 +38,53 @@ instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
     const position = instance.getOffset(element);
     const id = element.dataset.videoId;
     if (id !== undefined) {
+        console.log(id, position.x, position.y);
         Livewire.emit('moveCard', id, position.x, position.y);
     }
 });
 
-/*instance.bind(EVENT_ELEMENT_CLICK, (element) => {
-    console.log(element.getAttribute('jtk-overlay-id'));
-
-    //get the element in instance by id
-    const elements = instance.getManagedElements();
-    console.log(elements);
-
-    Livewire.emit('modal:open', 'set-content-link', element.dataset.videoId);
-});*/
-
-
-Livewire.on('refresh', () => {
-    instance.repaintEverything();
+instance.bind(EVENT_ELEMENT_CLICK, (element) => {
+    console.log(element);
+    if (element.dataset.videoId !== undefined) {
+        Livewire.emit('modal:open', 'edit-video-' + element.dataset.videoId);
+    }
 });
+
+
+window.addEventListener('refresh', _ => {
+    window.location.reload();
+})
+
+function drawEverything() {
+    const videos = document.getElementsByClassName('node');
+
+    for (const video of videos) {
+        for (const position of ['Top', 'Right', 'Bottom', 'Left']) {
+            instance.addEndpoint(video, {
+                endpoint: "Dot",
+                anchor: position,
+                source: true,
+                target: true,
+            });
+        }
+    }
+
+    for (const video of videos) {
+        for (const link of JSON.parse(video.dataset.links)) {
+            instance.connect({
+                source: video,
+                target: document.getElementById(`video-${link.id}`),
+                overlays: [
+                    {type: "Arrow", options: {location: 1}},
+                    {
+                        type: "Label", options: {
+                            label: link.content,
+                            location: 0.5,
+                            cssClass: "bg-white text-black p-1 rounded z-10",
+                        }
+                    }
+                ],
+            });
+        }
+    }
+}
