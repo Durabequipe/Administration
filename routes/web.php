@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BuilderController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InteractionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProjectController;
@@ -34,7 +33,7 @@ Route::middleware(['auth'])
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::get('/builder', [BuilderController::class, 'index'])->name('builder.index');
+    Route::get('/builder/{project}', [BuilderController::class, 'index'])->name('builder.index');
 });
 
 Route::prefix('/')

@@ -30,7 +30,6 @@ class SetContentLinkForm extends Form
 
     public function mount(): void
     {
-        //
     }
 
     /** Only applicable for Modals and SlideOvers */

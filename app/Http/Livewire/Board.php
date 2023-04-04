@@ -7,12 +7,13 @@ use Livewire\Component;
 
 class Board extends Component
 {
+    public $project = null;
     public $videos = [];
     protected $listeners = ['moveCard' => 'moveCard', 'addLink' => 'addLink'];
 
     public function mount()
     {
-        $this->videos = Video::all();
+        $this->videos = $this->project->videos;
     }
 
     public function render()
@@ -36,4 +37,10 @@ class Board extends Component
     {
         $this->emit('modal:open', 'set-content-link', ['video1' => $video1, 'video2' => $video2]);
     }
+
+    public function addVideo()
+    {
+        $this->emit('modal:open', 'add-video');
+    }
+
 }

@@ -1,9 +1,12 @@
-import './bootstrap';
-import './jsPlumb';
+import Alpine from 'alpinejs'
+import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
+import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
 
-import Alpine from 'alpinejs';
+import './jsPlumb.js';
 
+Alpine.plugin(FormsAlpinePlugin)
+Alpine.plugin(NotificationsAlpinePlugin)
 
-window.Alpine = Alpine;
+window.Alpine = Alpine
 
-Alpine.start();
+Alpine.start()

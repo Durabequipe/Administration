@@ -1,17 +1,19 @@
-module.exports = {
-    content: [
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './resources/**/*.vue',
-        './vendor/ralphjsmit/tall-interactive/resources/views/**/*.blade.php',
+const colors = require('tailwindcss/colors')
 
-    ],
-    darkMode: 'class', // or 'media' or 'class'
+module.exports = {
+    content: ['./resources/**/*.blade.php', './vendor/filament/**/*.blade.php'],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                danger: colors.rose,
+                primary: colors.blue,
+                success: colors.green,
+                warning: colors.yellow,
+            },
+        },
     },
-    variants: {
-        extend: {},
-    },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+    ],
 }

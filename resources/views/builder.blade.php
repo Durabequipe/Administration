@@ -1,9 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    @include('includes.layouts.navigation')
-
-    @livewire('board')
-
+    @livewire('board', ['project' => $project])
 @endsection
 
