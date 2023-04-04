@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_ELEMENT_CLICK, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -24,14 +24,13 @@ instance.importDefaults({
         AnchorLocations.AutoDefault
     ],
     maxConnections: 4,
-
 });
 
 
 drawEverything();
 
-instance.bind(CONNECTION, (params) => {
-    Livewire.emit('addLink', params.source.dataset.videoId, params.target.dataset.videoId);
+instance.bind(CONNECTION, (connection) => {
+    Livewire.emit('modal:open', 'set-content-link', connection.source.dataset.videoId, connection.target.dataset.videoId);
 });
 
 instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
@@ -43,19 +42,29 @@ instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
     }
 });
 
-instance.bind(EVENT_ELEMENT_CLICK, (element) => {
+/*instance.bind(EVENT_ELEMENT_CLICK, (element) => {
     console.log(element);
     if (element.dataset.videoId !== undefined) {
         Livewire.emit('modal:open', 'edit-video-' + element.dataset.videoId);
     }
+});*/
+
+
+/*window.addEventListener('refresh', _ => {
+    window.location.reload();
+})*/
+
+//livewire on refresh
+Livewire.on('refreshComponent', _ => {
+    window.location.reload();
 });
 
-
-window.addEventListener('refresh', _ => {
-    window.location.reload();
-})
-
 function drawEverything() {
+    drawEndpoints();
+    drawConnections();
+}
+
+function drawEndpoints() {
     const videos = document.getElementsByClassName('node');
 
     for (const video of videos) {
@@ -68,6 +77,10 @@ function drawEverything() {
             });
         }
     }
+}
+
+function drawConnections() {
+    const videos = document.getElementsByClassName('node');
 
     for (const video of videos) {
         for (const link of JSON.parse(video.dataset.links)) {

@@ -3,17 +3,19 @@
 namespace App\Forms;
 
 use App\Models\Video;
+use Closure;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use RalphJSmit\Tall\Interactive\Forms\Form;
 
+
 class SetContentLinkForm extends Form
 {
     public static $title = 'Ajouter un lien';
 
-    public array $video1;
-    public array $video2;
+    public string $video1ID;
+    public string $video2ID;
 
     public function getFormSchema(): array
     {
@@ -24,12 +26,10 @@ class SetContentLinkForm extends Form
         ];
     }
 
-    public function submit(Collection $state, Component $livewire): void
+    public function submit(Collection $state, Component $livewire, Closure $forceClose): void
     {
-        Video::find($this->video1['id'])->adjacents()->attach($this->video2['id'], ['content' => $state->get('content')]);
-
-        $livewire->dispatchBrowserEvent('refresh', 'Video saved!');
-
+        Video::find($this->video1ID)->adjacents()->attach($this->video2ID, ['content' => $state->get('content')]);
+        $livewire->emit('refreshComponent');
     }
 
     public function mount(): void
@@ -39,7 +39,7 @@ class SetContentLinkForm extends Form
     /** Only applicable for Modals and SlideOvers */
     public function onOpen(array $eventParams, self $formClass): void
     {
-        $this->video1 = $eventParams[0]['video1'];
-        $this->video2 = $eventParams[0]['video2'];
+        $formClass->video1ID = $eventParams[0];
+        $formClass->video2ID = $eventParams[1];
     }
 }

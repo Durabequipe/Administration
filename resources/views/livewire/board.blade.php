@@ -1,13 +1,3 @@
-{{--@foreach($project->videos as $video)
-    <x-tall-interactive::modal
-        id="edit-video-{{ $video->id }}"
-        :form="App\Forms\VideoForm::class"
-        :video="$video"
-        :project="$project"
-        dismissable
-    />
-
-@endforeach--}}
 
 <div id="builder-area" class="absolute w-screen h-screen bg-indigo-50">
 
@@ -40,16 +30,4 @@
     </div>
 
 </div>
-
-<x-tall-interactive::modal
-    id="set-content-link"
-    :form="App\Forms\SetContentLinkForm::class"
-/>
-
-<x-tall-interactive::modal
-    id="video-form"
-    :form="App\Forms\VideoForm::class"
-    :project="$project"
-    dismissable
-/>
 
