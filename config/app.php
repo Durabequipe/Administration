@@ -212,4 +212,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+
+    'ffmpeg_bin' => env('FFMPEG_BIN', '/usr/bin'),
 ];

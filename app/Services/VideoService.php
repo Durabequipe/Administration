@@ -14,8 +14,8 @@ class VideoService
     public function __construct()
     {
         $this->ffmpeg = FFMpeg::create([
-            'ffmpeg.binaries' => '/opt/homebrew/bin/ffmpeg',
-            'ffprobe.binaries' => '/opt/homebrew/bin/ffprobe'
+            'ffmpeg.binaries' => config('app.ffmpeg_bin') . '/ffmpeg',
+            'ffprobe.binaries' => config('app.ffmpeg_bin') . '/ffprobe',
         ]);
 
     }
