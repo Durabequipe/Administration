@@ -65,11 +65,19 @@ class Video extends Model
         );
     }
 
-    public function mobilePath() : Attribute
+    public function mobilePath(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes['mobile_path'] ? url(Storage::disk('videos')->url($this->attributes['mobile_path'])) : null,
             set: fn($value) => $this->attributes['mobile_path'] = $value
+        );
+    }
+
+    public function desktopThumbnail(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes['desktop_thumbnail'] ? url(Storage::disk('thumbnails')->url($this->attributes['desktop_thumbnail'])) : null,
+            set: fn($value) => $this->attributes['desktop_thumbnail'] = $value
         );
     }
 }

@@ -34,8 +34,10 @@ instance.bind(CONNECTION, (connection) => {
 });
 
 instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
-    const position = instance.getOffset(element);
-    const id = element.dataset.videoId;
+    //search in parent the div with class node
+    const parent = element.closest('.node');
+    const position = instance.getOffset(parent);
+    const id = parent.dataset.videoId;
     if (id !== undefined) {
         console.log(id, position.x, position.y);
         Livewire.emit('moveCard', id, position.x, position.y);
