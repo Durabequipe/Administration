@@ -6,8 +6,21 @@ use App\Models\Project;
 
 class BuilderController extends Controller
 {
-    public function index(Project $project)
+
+    public function index()
     {
-        return view('builder', compact('project'));
+        $projects = auth()->user()->projects;
+
+        return view('builder.index', compact('projects'));
+    }
+
+    public function show(Project $project)
+    {
+        return view('builder.show', compact('project'));
+    }
+
+    public function create()
+    {
+        return view('builder.create');
     }
 }

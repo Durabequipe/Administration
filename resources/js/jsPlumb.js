@@ -34,8 +34,10 @@ instance.bind(CONNECTION, (connection) => {
 });
 
 instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
+    console.log(element);
     //search in parent the div with class node
     const parent = element.closest('.node');
+    console.log(parent);
     const position = instance.getOffset(parent);
     const id = parent.dataset.videoId;
     if (id !== undefined) {

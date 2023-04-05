@@ -24,16 +24,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])
-    ->get('/dashboard', function () {
-        return view('dashboard');
-    })
-    ->name('dashboard');
-
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::get('/builder/{project}', [BuilderController::class, 'index'])->name('builder.index');
+    Route::controller(BuilderController::class)->prefix('/builder')->group(function () {
+        Route::get('/', 'index')->name('builder.index');
+        Route::get('/create', 'create')->name('builder.create');
+        Route::get('/{project}', 'show')->name('builder.show');
+        Route::get('/{project}/edit', 'edit')->name('builder.edit');
+
+
+    });
 });
 
 Route::prefix('/')

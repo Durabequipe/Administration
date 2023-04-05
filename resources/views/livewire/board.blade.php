@@ -1,4 +1,4 @@
-<div id="builder-area" class="absolute w-screen h-screen bg-indigo-50">
+<div id="builder-area" class="absolute w-screen h-screen z-10">
 
     @foreach($project->videos as $video)
         <div
@@ -14,16 +14,6 @@
                 "node video-{{ $video->id }} flex justify-center w-48 items-center absolute" => true,
             ])
             style="left: {{ $video->position_x }}px; top: {{ $video->position_y }}px;">
-            {{--<div class="flex justify-center w-full h-full">
-                <img class="" src="{{ $video->desktopThumbnail }}">
-                <div class="absolute inset-0 bg-black opacity-40"></div>
-
-                <div class="flex flex-col absolute bottom-1 justify-center align-middle items-center">
-                    <h1 class="text-white text-xl">{{ $video->name }}</h1>
-                    <h3 class="text-white text-sm">{{ $video->interaction_title }}</h3>
-                </div>
-            </div>--}}
-
             <div class="relative">
                 <img src="{{ $video->desktopThumbnail }}" alt="{{ $video->name }}" class="w-full h-auto object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
@@ -36,11 +26,13 @@
     @endforeach
 
 
-    <div id="buttons-area" class="fixed flex bottom-10 w-screen justify-center">
+    <div id="buttons-area" class="z-[999] fixed flex bottom-10 w-screen justify-center">
         <div class="w-48 h-16 bg-indigo-100 flex justify-around rounded-3xl ">
             <button id="save" class="p-2 border m-2" onclick="Livewire.emit('modal:open', 'video-form')">
                 Ajouter une vidéo
             </button>
+
+            <a
         </div>
 
     </div>
