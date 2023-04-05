@@ -25,7 +25,7 @@
             </div>--}}
 
             <div class="relative">
-                <img src="{{ $video->desktopThumbnail }}" alt="your-image-alt" class="w-full h-auto object-cover">
+                <img src="{{ $video->desktopThumbnail }}" alt="{{ $video->name }}" class="w-full h-auto object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
                 <div class="absolute inset-x-0 bottom-0 p-1 pb-2">
                     <h2 class="text-white text-xl font-bold text-center">{{ $video->name }}</h2>
