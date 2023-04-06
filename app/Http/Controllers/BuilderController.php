@@ -23,4 +23,18 @@ class BuilderController extends Controller
     {
         return view('builder.create');
     }
+
+    public function edit(Project $project)
+    {
+        return view('builder.edit', compact('project'));
+    }
+
+    public function destroy(Project $project)
+    {
+        $project->delete();
+
+        return redirect()->route('builder.index');
+    }
+
+
 }

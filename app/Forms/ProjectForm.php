@@ -2,7 +2,6 @@
 
 namespace App\Forms;
 
-use App\Models\Project;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
@@ -11,16 +10,18 @@ use RalphJSmit\Tall\Interactive\Forms\Form;
 class ProjectForm extends Form
 {
 
-    public ?Project $project = null;
-
     public function getFormSchema(array $params): array
     {
+        $project = $params['project'] ?? null;
+        $id = $project['id'] ?? null;
+        $name = $project['name'] ?? null;
         return [
             Hidden::make('id')
-                ->default($this->project?->id),
+                ->default($id),
 
             TextInput::make('name')
                 ->label('Name')
+                ->default($name)
                 ->required(),
 
         ];
@@ -34,7 +35,6 @@ class ProjectForm extends Form
             $state->toArray()
         );
 
-        $this->project = $project;
         return redirect()->route('builder.index');
     }
 

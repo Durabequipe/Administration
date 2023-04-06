@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{project}', 'show')->name('builder.show');
         Route::get('/{project}/edit', 'edit')->name('builder.edit');
 
+        Route::delete('/{project}', 'destroy')->name('builder.destroy');
+
 
     });
 });
