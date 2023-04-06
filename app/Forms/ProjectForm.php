@@ -15,6 +15,7 @@ class ProjectForm extends Form
         $project = $params['project'] ?? null;
         $id = $project['id'] ?? null;
         $name = $project['name'] ?? null;
+        $description = $project['description'] ?? null;
         return [
             Hidden::make('id')
                 ->default($id),
@@ -22,6 +23,11 @@ class ProjectForm extends Form
             TextInput::make('name')
                 ->label('Name')
                 ->default($name)
+                ->required(),
+
+            TextInput::make('description')
+                ->label('Description')
+                ->default($description)
                 ->required(),
 
         ];

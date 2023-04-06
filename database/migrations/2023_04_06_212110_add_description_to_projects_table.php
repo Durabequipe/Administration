@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->uuid('api_key')->after('password')->nullable();
+        Schema::table('projects', function (Blueprint $table) {
+            $table->string('description')->nullable();
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->dropColumn('api_key');
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 };
