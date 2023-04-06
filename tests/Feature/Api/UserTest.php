@@ -3,11 +3,12 @@
 namespace Tests\Feature\Api;
 
 use App\Models\User;
-
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
+use Database\Seeders\PermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Str;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -21,7 +22,7 @@ class UserTest extends TestCase
 
         Sanctum::actingAs($user, [], 'web');
 
-        $this->seed(\Database\Seeders\PermissionsSeeder::class);
+        $this->seed(PermissionsSeeder::class);
 
         $this->withoutExceptionHandling();
     }
@@ -48,12 +49,13 @@ class UserTest extends TestCase
         $data = User::factory()
             ->make()
             ->toArray();
-        $data['password'] = \Str::random('8');
+        $data['password'] = Str::random('8');
 
         $response = $this->postJson(route('api.users.store'), $data);
 
         unset($data['password']);
         unset($data['email_verified_at']);
+        unset($data['api_key']);
 
         $this->assertDatabaseHas('users', $data);
 
@@ -72,7 +74,7 @@ class UserTest extends TestCase
             'email' => $this->faker->unique->email,
         ];
 
-        $data['password'] = \Str::random('8');
+        $data['password'] = Str::random('8');
 
         $response = $this->putJson(route('api.users.update', $user), $data);
 
