@@ -37,18 +37,12 @@ class VideoForm extends Form
                 ->disk('videos')
                 ->reactive()
                 ->afterStateUpdated(function (Closure $set, TemporaryUploadedFile $state, VideoService $videoService) {
-                    $videoService->generateThumbnailFromPath($state->getRealPath());
+                    $path = $videoService->generateThumbnailFromPath($state->getRealPath());
+                    $set('desktop_thumbnail', $path);
                 })
-                ->columnSpan(function () {
-                    return $this->video ? 6 : 12;
-                }),
+                ->columnSpan(12),
 
-            FileUpload::make('desktop_thumbnail')
-                ->disk('thumbnails')
-                ->columnSpan(6)
-                ->visible(function ($state) {
-                    return $this->video;
-                }),
+            Hidden::make('desktop_thumbnail'),
 
             FileUpload::make('mobile_path')
                 ->placeholder('Mobile video path')
@@ -58,17 +52,9 @@ class VideoForm extends Form
                     $path = $videoService->generateThumbnailFromPath($state->getRealPath());
                     $set('mobile_thumbnail', $path);
                 })
-                ->columnSpan(function () {
-                    return $this->video ? 6 : 12;
-                }),
+                ->columnSpan(12),
 
-            FileUpload::make('mobile_thumbnail')
-                ->disk('thumbnails')
-                ->columnSpan(6)
-                ->visible(function ($state) {
-                    return $this->video;
-                }),
-
+            Hidden::make('mobile_thumbnail'),
 
             Toggle::make('is_main')
                 ->rules(['boolean'])
@@ -103,24 +89,28 @@ class VideoForm extends Form
     }
 
     /** Only applicable for Modals and SlideOvers */
-    public function onOpen(array $eventParams, self $formClass, Component $livewire): void
+    public function onOpen(array $eventParams, self $formClass, Component $livewire, $params): void
     {
         if ($eventParams[0] != null) {
             $formClass->video = Video::find($eventParams[0]);
 
-            $datas = $formClass->fill();
+            $datas = $formClass->fill($params);
         } else {
             $formClass->video = null;
-            $datas = [];
+            $datas = [
+                'project_id' => $params['project']['id'],
+            ];
         }
         $livewire->form->fill($datas);
 
     }
 
-    public function fill(): array
+    public function fill($params): array
     {
         if (!$this->video)
-            return [];
+            return [
+                'project_id' => $params['project']['id'],
+            ];
 
         return [
             'name' => $this->video['name'],
