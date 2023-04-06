@@ -121,5 +121,9 @@ Route::name('api.')
 
     });
 
-Route::get('/player/{project}', [PlayerController::class, 'index'])->name('player');
-Route::get('/projectsIds', [ProjectController::class, 'getProjectsIds'])->name('projectsIds');
+Route::middleware('api_key')->group(function () {
+    Route::get('/players', [PlayerController::class, 'index'])->name('projects.index');
+    Route::get('/players/{project}', [PlayerController::class, 'show'])->name('players.show');
+    Route::get('/projectsIds', [ProjectController::class, 'getProjectsIds'])->name('projectsIds');
+});
+

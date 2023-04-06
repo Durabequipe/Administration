@@ -8,7 +8,13 @@ use App\Models\Project;
 
 class PlayerController extends Controller
 {
-    public function index(Project $project)
+
+    public function index()
+    {
+        return PlayerResource::collection(auth()->user()->projects)->collection;
+    }
+
+    public function show(Project $project)
     {
         return new PlayerResource($project);
     }

@@ -20,6 +20,7 @@ class PlayerResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'entrypointId' => $this->mainVideo->id,
             'coverImage' => 'https://picsum.photos/1920/1080',
             'thumbnailImage' => 'https://picsum.photos/1920/1080',

@@ -38,11 +38,15 @@
             </a>
             <!-- Left links -->
             <ul
-                class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
+                class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row justify-between w-full"
                 data-te-navbar-nav-ref>
 
 
-                @auth()
+                @auth
+
+                    <li class="text-white">
+                        Api key : {{ auth()->user()->api_key }}
+                    </li>
                     <li class="lg:pr-2" data-te-nav-item-ref>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
