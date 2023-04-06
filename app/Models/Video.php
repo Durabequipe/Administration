@@ -91,18 +91,16 @@ class Video extends Model
     public function generateDesktopThumbnail()
     {
         if ($this->desktop_thumbnail) return;
-        $videoService = app(VideoService::class);
         $this->update([
-            'desktop_thumbnail' => $videoService->generateThumbnailFromPath($this->desktop_path),
+            'desktop_thumbnail' => app(VideoService::class)->generateThumbnailFromPath($this->desktop_path),
         ]);
     }
 
     public function generateMobileThumbnail()
     {
         if ($this->mobile_thumbnail || !$this->mobile_path) return;
-        $videoService = app(VideoService::class);
         $this->update([
-            'desktop_thumbnail' => $videoService->generateThumbnailFromPath($this->mobile_path),
+            'desktop_thumbnail' => app(VideoService::class)->generateThumbnailFromPath($this->mobile_path),
         ]);
     }
 }
