@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
+import {CONNECTION} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -33,8 +33,10 @@ instance.bind(CONNECTION, (connection) => {
     Livewire.emit('modal:open', 'set-content-link', connection.source.dataset.videoId, connection.target.dataset.videoId);
 });
 
-instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
+/*instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
     console.log(element);
+    if(element.classList.contains('fas')) return;
+
     //search in parent the div with class node
     const parent = element.closest('.node');
     console.log(parent);
@@ -44,13 +46,13 @@ instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
         console.log(id, position.x, position.y);
         Livewire.emit('moveCard', id, position.x, position.y);
     }
-});
+});*/
 
 /*instance.bind(EVENT_ELEMENT_CLICK, (element) => {
-    console.log(element);
-    if (element.dataset.videoId !== undefined) {
+    console.log('click' + element);
+    /!*if (element.dataset.videoId !== undefined) {
         Livewire.emit('modal:open', 'edit-video-' + element.dataset.videoId);
-    }
+    }*!/
 });*/
 
 

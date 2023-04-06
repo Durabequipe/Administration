@@ -26,7 +26,7 @@ class VideoService
         return $this->processThumbnailGeneration($video->desktop_path, $thumbnail);
     }
 
-    private function processThumbnailGeneration($videoPath, $thumbnailPath, $sec = 10): string
+    private function processThumbnailGeneration($videoPath, $thumbnailPath, $sec = 0): string
     {
         $video = $this->ffmpeg->open($videoPath);
         $frame = $video->frame(TimeCode::fromSeconds($sec));
