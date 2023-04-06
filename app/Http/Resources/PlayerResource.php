@@ -31,6 +31,10 @@ class PlayerResource extends JsonResource
                     $video->desktop_path,
                     $video->mobile_path
                 ],
+                'thumbnails' => [
+                    $video->desktop_thumbnail,
+                    $video->mobile_thumbnail
+                ],
                 "animation" => [
                     "title" => $video->interaction_title,
                     "position" => $video->interaction->position,
