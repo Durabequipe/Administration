@@ -32,7 +32,7 @@ class VideoService
         $frame = $video->frame(TimeCode::fromSeconds($sec));
         $frame->save($thumbnailPath);
 
-        return $thumbnailPath;
+        return basename($thumbnailPath);
     }
 
     public function generateThumbnailFromPath(string $videoPath): string

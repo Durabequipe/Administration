@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
+use App\Services\VideoService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,11 +58,11 @@ class Video extends Model
         return $this->belongsToMany(Video::class, 'adjacents_videos');
     }
 
-    public function desktopPath() : Attribute
+    public function desktopPath(): Attribute
     {
         return Attribute::make(
-            get: fn () => url(Storage::disk('videos')->url($this->attributes['desktop_path'])),
-            set: fn ($value) => $this->attributes['desktop_path'] = $value
+            get: fn() => url(Storage::disk('videos')->url($this->attributes['desktop_path'])),
+            set: fn($value) => $this->attributes['desktop_path'] = $value
         );
     }
 
@@ -79,5 +80,29 @@ class Video extends Model
             get: fn() => $this->attributes['desktop_thumbnail'] ? url(Storage::disk('thumbnails')->url($this->attributes['desktop_thumbnail'])) : null,
             set: fn($value) => $this->attributes['desktop_thumbnail'] = $value
         );
+    }
+
+    public function generateThumbnails()
+    {
+        $this->generateDesktopThumbnail();
+        $this->generateMobileThumbnail();
+    }
+
+    public function generateDesktopThumbnail()
+    {
+        if ($this->desktop_thumbnail) return;
+        $videoService = app(VideoService::class);
+        $this->update([
+            'desktop_thumbnail' => $videoService->generateThumbnailFromPath($this->desktop_path),
+        ]);
+    }
+
+    public function generateMobileThumbnail()
+    {
+        if ($this->mobile_thumbnail || !$this->mobile_path) return;
+        $videoService = app(VideoService::class);
+        $this->update([
+            'desktop_thumbnail' => $videoService->generateThumbnailFromPath($this->mobile_path),
+        ]);
     }
 }

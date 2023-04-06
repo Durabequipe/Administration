@@ -39,11 +39,8 @@ class VideoForm extends Form
                 ->default($params['video']['desktop_path'] ?? '')
                 ->reactive()
                 ->afterStateUpdated(function (Closure $set, TemporaryUploadedFile $state, VideoService $videoService) {
-                    ray($state->getRealPath());
                     $path = $videoService->generateThumbnailFromPath($state->getRealPath());
-                    ray($path);
-                    $set('desktop_thumbnail', basename($path));
-                    ray('state updated');
+                    $set('desktop_thumbnail', $path);
                 })
                 ->columnSpan(12),
 
