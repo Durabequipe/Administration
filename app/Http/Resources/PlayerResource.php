@@ -21,6 +21,8 @@ class PlayerResource extends JsonResource
         return [
             'id' => $this->id,
             'entrypointId' => $this->mainVideo->id,
+            'coverImage' => 'https://picsum.photos/1920/1080',
+            'thumbnailImage' => 'https://picsum.photos/1920/1080',
             'videos' => $this->videos->map(fn(Video $video) => [
                 "id" => $video->id,
                 'name' => $video->name,
