@@ -40,4 +40,23 @@ class VideoService
         $path = storage_path('app/public/thumbnails/' . Str::uuid() . '.jpg');
         return $this->processThumbnailGeneration($videoPath, $path);
     }
+
+    public function ensureNotRecursive(Video $video1, Video $video2): bool
+    {
+
+        $ids = $this->getAllAdjacentIds($video2);
+
+        return !in_array($video1->id, $ids);
+
+    }
+
+    public function getAllAdjacentIds(Video $video, $ids = []): array
+    {
+        $ids[] = $video->id;
+        foreach ($video->adjacents as $adjacent) {
+            $ids = $this->getAllAdjacentIds($adjacent, $ids);
+        }
+
+        return $ids;
+    }
 }

@@ -31,9 +31,11 @@
     localStorage.setItem('color-theme', 'light');
 </script>
 
+@livewire('notifications')
 
 <div class="" style="width: 100vw; height: 100vh;">
-    @yield('content')
+
+@yield('content')
 </div>
 
 <x-tall-interactive::actionables-manager/>

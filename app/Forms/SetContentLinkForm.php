@@ -3,8 +3,10 @@
 namespace App\Forms;
 
 use App\Models\Video;
+use App\Services\VideoService;
 use Closure;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use RalphJSmit\Tall\Interactive\Actions\ButtonAction;
@@ -40,14 +42,31 @@ class SetContentLinkForm extends Form
     }
 
     /** Only applicable for Modals and SlideOvers */
-    public function onOpen(array $eventParams, self $formClass, Component $livewire): void
+    public function onOpen(array $eventParams, self $formClass, Component $livewire, VideoService $videoService, $forceClose): void
     {
         $formClass->video1ID = $eventParams[0];
         $formClass->video2ID = $eventParams[1];
 
-        if ($formClass->video1ID && $formClass->video2ID) {
-            $video1 = Video::find($formClass->video1ID);
-            $content = $video1->adjacents()->where('id', $formClass->video2ID)->first()?->pivot->content;
+        $video1 = Video::find($formClass->video1ID);
+        $video2 = Video::find($formClass->video2ID);
+
+        if (!$videoService->ensureNotRecursive($video1, $video2)) {
+
+            Notification::make()
+                ->title('Erreur')
+                ->body('Impossible de créer un lien récursif')
+                ->danger()
+                ->send();
+
+            sleep(1);
+            $livewire->emit('refreshComponent');
+
+
+            return;
+        }
+
+        if ($video1 && $video2) {
+            $content = $video1->adjacents()->where('id', $video2->id)->first()?->pivot->content;
             $livewire->form->fill([
                 'content' => $content
             ]);

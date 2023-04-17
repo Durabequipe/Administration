@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@awcodes/alpine-floating-ui": "^3.5.0",
         "@jsplumb/browser-ui": "^5.13.7",
         "@jsplumb/connector-bezier": "^5.13.7",
         "@jsplumb/connector-flowchart": "^5.13.7",
