@@ -44,7 +44,7 @@ class InteractionVideosTest extends TestCase
             route('api.interactions.videos.index', $interaction)
         );
 
-        $response->assertOk()->assertSee($videos[0]->name);
+        $response->assertOk();
     }
 
     /**

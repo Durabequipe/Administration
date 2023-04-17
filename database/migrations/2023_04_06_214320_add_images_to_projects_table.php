@@ -11,8 +11,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('cover_image');
-            $table->string('thumbnail_image');
+            $table->string('cover_image')
+                ->after('description');
+            $table->string('thumbnail_image')
+                ->after('cover_image');
         });
     }
 

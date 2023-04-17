@@ -23,6 +23,7 @@ class ProjectStoreRequest extends FormRequest
             'name' => ['required', 'max:255', 'string'],
             'cover_image' => ['required', 'max:255', 'string'],
             'thumbnail_image' => ['required', 'max:255', 'string'],
+            'is_active' => ['required', 'boolean'],
         ];
     }
 }

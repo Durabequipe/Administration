@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('description')
-                ->nullable()
-                ->after('name');
+            $table->boolean('is_active')
+                ->default(true)
+                ->after('thumbnail_image');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('description');
+            $table->dropColumn('is_active');
         });
     }
 };

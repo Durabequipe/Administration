@@ -25,6 +25,7 @@ class ProjectFactory extends Factory
             'name' => $this->faker->word(),
             'cover_image' => $this->faker->word(),
             'thumbnail_image' => $this->faker->word(),
+            'is_active' => $this->faker->boolean(70),
         ];
     }
 }

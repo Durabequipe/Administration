@@ -1,7 +1,15 @@
 <div class="flex flex-col">
     <a href="{{ route('builder.show', $project) }}">
         <div class="col-span-1 border-2 h-96 rounded flex justify-center items-center">
-            {{ $project->name }}
+            <div class="flex flex-col">
+                {{ $project->name }}
+                <br>
+                <br>
+                @if(!$project->is_active)
+                    <i class="fas fa-eye-slash text-5xl"></i>
+                @endif
+            </div>
+
         </div>
     </a>
 

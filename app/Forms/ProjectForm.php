@@ -5,6 +5,7 @@ namespace App\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Illuminate\Support\Collection;
 use RalphJSmit\Tall\Interactive\Forms\Form;
 
@@ -21,8 +22,13 @@ class ProjectForm extends Form
                 ->default($project['id'] ?? null),
 
             TextInput::make('name')
-                ->label('Name')
+                ->label('Nom')
                 ->default($project['name'] ?? null)
+                ->required(),
+
+            Toggle::make('is_active')
+                ->label('Actif')
+                ->default($project['is_active'] ?? null)
                 ->required(),
 
             TextInput::make('description')

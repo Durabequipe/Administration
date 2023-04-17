@@ -22,6 +22,7 @@ class PlayerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'is_active' => (boolean)$this->is_active,
             'entrypointId' => $this->mainVideo?->id,
             'coverImage' => 'https://picsum.photos/1920/1080',
             'thumbnailImage' => 'https://picsum.photos/1920/1080',
