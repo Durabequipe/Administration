@@ -7,6 +7,7 @@ use Closure;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use RalphJSmit\Tall\Interactive\Actions\ButtonAction;
 use RalphJSmit\Tall\Interactive\Forms\Form;
 
 
@@ -52,5 +53,18 @@ class SetContentLinkForm extends Form
             ]);
         }
 
+    }
+
+    public function getButtonActions()
+    {
+        return [
+            ButtonAction::make('delete')
+                ->label('Supprimer')
+                ->color('danger')
+                ->action(function (Component $livewire) {
+                    Video::find($this->video1ID)->adjacents()->detach($this->video2ID);
+                    $livewire->emit('refreshComponent');
+                }),
+        ];
     }
 }
