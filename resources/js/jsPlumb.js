@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_CONNECTION_ABORT, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_CONNECTION_CLICK, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -29,21 +29,25 @@ drawEverything();
 
 
 instance.bind(CONNECTION, (connection) => {
+    console.log("connection created");
+    console.log(connection.id);
     Livewire.emit('modal:open', 'set-content-link', connection.source.dataset.videoId, connection.target.dataset.videoId);
 });
 
-instance.bind(EVENT_CONNECTION_ABORT, (connection) => {
-    console.log(connection);
-    Livewire.emit('deleteLink', connection.source.dataset.videoId, connection.target.dataset.videoId);
+instance.bind(EVENT_CONNECTION_CLICK, (connection) => {
+    console.log("connection click");
+    console.log(connection.source.dataset.videoId, connection.target.dataset.videoId);
+    Livewire.emit('modal:open', 'set-content-link', connection.source.dataset.videoId, connection.target.dataset.videoId);
 });
 
 instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
+    console.log("element mouse up");
     console.log(element);
     if (element.classList.contains('fas')) return;
 
     //search in parent the div with class node
     const parent = element.closest('.node');
-    console.log(parent);
+    if (parent === null) return;
     const position = instance.getOffset(parent);
     const id = parent.dataset.videoId;
     if (id !== undefined) {
