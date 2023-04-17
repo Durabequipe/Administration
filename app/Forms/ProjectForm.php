@@ -39,7 +39,7 @@ class ProjectForm extends Form
             FileUpload::make('cover_image')
                 ->label('Cover Image')
                 ->default($project['cover_image'] ?? null)
-                ->disk('public'),
+                ->disk('images'),
 
             FileUpload::make('thumbnail_image')
                 ->label('Thumbnail Image')

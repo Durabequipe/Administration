@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class PlayerResource extends JsonResource
 {
@@ -24,8 +25,8 @@ class PlayerResource extends JsonResource
             'description' => $this->description,
             'isActive' => (boolean)$this->is_active,
             'entrypointId' => $this->mainVideo?->id,
-            'coverImage' => url($this->cover_image),
-            'thumbnailImage' => url($this->thumbnail_image),
+            'coverImage' => Storage::disk('images')->url($this->cover_image),
+            'thumbnailImage' => Storage::disk('images')->url($this->cover_image),
             'videos' => $this->videos->map(fn(Video $video) => [
                 "id" => $video->id,
                 'name' => $video->name,
