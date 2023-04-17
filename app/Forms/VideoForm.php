@@ -12,6 +12,7 @@ use Filament\Forms\Components\Toggle;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\TemporaryUploadedFile;
+use RalphJSmit\Tall\Interactive\Actions\ButtonAction;
 use RalphJSmit\Tall\Interactive\Forms\Form;
 
 class VideoForm extends Form
@@ -124,6 +125,20 @@ class VideoForm extends Form
             'is_main' => $this->video['is_main'],
             'interaction_title' => $this->video['interaction_title'],
             'project_id' => $this->video['project_id'],
+        ];
+    }
+
+    public function getButtonActions(): array
+    {
+        return [
+            ButtonAction::make('delete')
+                ->label('Supprimer')
+                ->color('danger')
+                ->action(function (Component $livewire) {
+                    Video::find($this->video['id'])->delete();
+                    $livewire->emit('refreshComponent', 'Video deleted!');
+                })
+                ->visible(fn() => $this->video['id'] ?? false),
         ];
     }
 }

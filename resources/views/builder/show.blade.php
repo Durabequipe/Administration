@@ -26,6 +26,8 @@
         id="video-form"
         :form="App\Forms\VideoForm::class"
         :project="$project"
+        dismissableWith="Fermer"
+        submitWith="Sauvegarder"
         dismissable
     />
 
