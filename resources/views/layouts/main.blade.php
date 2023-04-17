@@ -19,6 +19,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    @yield('scriptsHead')
+
 
     @livewireStyles
 </head>
@@ -29,7 +31,6 @@
     localStorage.setItem('color-theme', 'light');
 </script>
 
-@yield('scripts')
 
 <div class="" style="width: 100vw; height: 100vh;">
     @yield('content')
@@ -52,6 +53,9 @@
         notyf.success('{{ session('success') }}')
     </script>
 @endif
+
+@yield('scripts')
+
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
-@section('scripts')
-    <script src="{{ asset('js/jsPlumb.js') }}"></script>
+@section('scriptsHead')
+    @vite(['resources/js/jsPlumb.js'])
 @endsection
 
 @section('content')
@@ -25,4 +25,3 @@
     />
 
 @endsection
-

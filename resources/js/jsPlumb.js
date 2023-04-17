@@ -1,8 +1,7 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION, EVENT_CONNECTION_ABORT} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_CONNECTION_ABORT, EVENT_ELEMENT_MOUSE_UP} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
-
 
 const instance = jsPlumbBrowserUI.newInstance({
     container: document.querySelector("#builder-area"),
@@ -26,8 +25,8 @@ instance.importDefaults({
     maxConnections: 4,
 });
 
-
 drawEverything();
+
 
 instance.bind(CONNECTION, (connection) => {
     Livewire.emit('modal:open', 'set-content-link', connection.source.dataset.videoId, connection.target.dataset.videoId);
@@ -38,9 +37,9 @@ instance.bind(EVENT_CONNECTION_ABORT, (connection) => {
     Livewire.emit('deleteLink', connection.source.dataset.videoId, connection.target.dataset.videoId);
 });
 
-/*instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
+instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {
     console.log(element);
-    if(element.classList.contains('fas')) return;
+    if (element.classList.contains('fas')) return;
 
     //search in parent the div with class node
     const parent = element.closest('.node');
@@ -51,7 +50,7 @@ instance.bind(EVENT_CONNECTION_ABORT, (connection) => {
         console.log(id, position.x, position.y);
         Livewire.emit('moveCard', id, position.x, position.y);
     }
-});*/
+});
 
 /*instance.bind(EVENT_ELEMENT_CLICK, (element) => {
     console.log('click' + element);
