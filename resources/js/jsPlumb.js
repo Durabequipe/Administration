@@ -27,7 +27,6 @@ instance.importDefaults({
 
 drawEverything();
 
-
 instance.bind(CONNECTION, (connection) => {
     console.log("connection created");
     console.log(connection.id);

@@ -12,9 +12,14 @@
         <h1 class="font-bold">{{ $project->name }}</h1>
     </div>
     @livewire('board', ['project' => $project])
+
     <x-tall-interactive::modal
         id="set-content-link"
         :form="App\Forms\SetContentLinkForm::class"
+        title="Texte de lien"
+        dismissableWith="Fermer"
+        submitWith="Sauvegarder"
+        dismissable
     />
 
     <x-tall-interactive::modal
