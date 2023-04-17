@@ -1,5 +1,5 @@
 import * as jsPlumbBrowserUI from "@jsplumb/browser-ui";
-import {CONNECTION} from "@jsplumb/browser-ui";
+import {CONNECTION, EVENT_CONNECTION_ABORT} from "@jsplumb/browser-ui";
 import {AnchorLocations} from "@jsplumb/common";
 import {BezierConnector} from "@jsplumb/connector-bezier";
 
@@ -31,6 +31,11 @@ drawEverything();
 
 instance.bind(CONNECTION, (connection) => {
     Livewire.emit('modal:open', 'set-content-link', connection.source.dataset.videoId, connection.target.dataset.videoId);
+});
+
+instance.bind(EVENT_CONNECTION_ABORT, (connection) => {
+    console.log(connection);
+    Livewire.emit('deleteLink', connection.source.dataset.videoId, connection.target.dataset.videoId);
 });
 
 /*instance.bind(EVENT_ELEMENT_MOUSE_UP, (element) => {

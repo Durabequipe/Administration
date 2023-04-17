@@ -2,6 +2,7 @@
 
 namespace App\Forms;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
@@ -10,25 +11,34 @@ use RalphJSmit\Tall\Interactive\Forms\Form;
 class ProjectForm extends Form
 {
 
+    public $project = null;
+
     public function getFormSchema(array $params): array
     {
         $project = $params['project'] ?? null;
-        $id = $project['id'] ?? null;
-        $name = $project['name'] ?? null;
-        $description = $project['description'] ?? null;
         return [
             Hidden::make('id')
-                ->default($id),
+                ->default($project['id'] ?? null),
 
             TextInput::make('name')
                 ->label('Name')
-                ->default($name)
+                ->default($project['name'] ?? null)
                 ->required(),
 
             TextInput::make('description')
                 ->label('Description')
-                ->default($description)
+                ->default($project['description'] ?? null)
                 ->required(),
+
+            FileUpload::make('cover_image')
+                ->label('Cover Image')
+                ->default($project['cover_image'] ?? null)
+                ->disk('public'),
+
+            FileUpload::make('thumbnail_image')
+                ->label('Thumbnail Image')
+                ->default($project['thumbnail_image'] ?? null)
+                ->disk('images')
 
         ];
     }
@@ -36,7 +46,7 @@ class ProjectForm extends Form
     public function submit(Collection $state)
     {
         $project = auth()->user()->projects()->updateOrCreate([
-            'id' => $state->get('id')
+            'id' => $state['id'] ?? null
         ],
             $state->toArray()
         );
@@ -46,6 +56,7 @@ class ProjectForm extends Form
 
     public function mount(): void
     {
+
     }
 
     /** Only applicable for Modals and SlideOvers */

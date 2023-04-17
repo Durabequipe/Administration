@@ -4,7 +4,7 @@ import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/
 
 import './fontawesome.js';
 
-import './jsPlumb.js';
+//import './jsPlumb.js';
 
 Alpine.plugin(FormsAlpinePlugin)
 Alpine.plugin(NotificationsAlpinePlugin)

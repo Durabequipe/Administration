@@ -13,7 +13,8 @@ class Board extends Component
     protected $listeners = [
         'moveCard' => 'moveCard',
         'addLink' => 'addLink',
-        'addVideo' => 'addVideo'
+        'addVideo' => 'addVideo',
+        'deleteLink' => 'deleteLink',
     ];
 
     public function mount()
@@ -34,6 +35,14 @@ class Board extends Component
         ]);
 
         $this->emit('refreshComponent');
+    }
+
+    public function deleteLink($videoId1, $videoId2)
+    {
+        $video1 = Video::find($videoId1);
+        $video2 = Video::find($videoId2);
+
+        dd($video1, $video2);
     }
 
 }

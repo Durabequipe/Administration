@@ -19,7 +19,7 @@ class Project extends Model
     use Searchable;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'cover_image', 'thumbnail_image'];
 
     protected $searchableFields = ['*'];
 

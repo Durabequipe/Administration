@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Project;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProjectFactory extends Factory
@@ -24,6 +23,8 @@ class ProjectFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
+            'cover_image' => $this->faker->word(),
+            'thumbnail_image' => $this->faker->word(),
         ];
     }
 }

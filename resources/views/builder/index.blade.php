@@ -9,11 +9,18 @@
         @endforeach
 
 
-        <a href="{{ route('builder.create') }}">
+        <div onclick="Livewire.emit('modal:open', 'project-form')">
             <div class="col-span-1 border-2 h-96 rounded flex justify-center items-center">
                 <i class="fas fa-plus-circle text-5xl"></i>
             </div>
-        </a>
+        </div>
+
+
     </div>
+
+    <x-tall-interactive::slide-over
+        id="project-form"
+        :form="App\Forms\ProjectForm::class"
+    />
 
 @endsection
