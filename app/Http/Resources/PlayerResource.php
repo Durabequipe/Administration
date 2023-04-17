@@ -22,10 +22,10 @@ class PlayerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'is_active' => (boolean)$this->is_active,
+            'isActive' => (boolean)$this->is_active,
             'entrypointId' => $this->mainVideo?->id,
-            'coverImage' => 'https://picsum.photos/1920/1080',
-            'thumbnailImage' => 'https://picsum.photos/1920/1080',
+            'coverImage' => url($this->cover_image),
+            'thumbnailImage' => url($this->thumbnail_image),
             'videos' => $this->videos->map(fn(Video $video) => [
                 "id" => $video->id,
                 'name' => $video->name,
