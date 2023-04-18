@@ -5,6 +5,9 @@
                 {{ $project->name }}
                 <br>
                 <br>
+                {{ $project->description }}
+                <br>
+                <br>
                 @if(!$project->is_active)
                     <i class="fas fa-eye-slash text-5xl"></i>
                 @endif
