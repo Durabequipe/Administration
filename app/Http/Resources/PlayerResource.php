@@ -26,7 +26,7 @@ class PlayerResource extends JsonResource
             'isActive' => (boolean)$this->is_active,
             'entrypointId' => $this->mainVideo?->id,
             'coverImage' => Storage::disk('images')->url($this->cover_image),
-            'thumbnailImage' => Storage::disk('images')->url($this->cover_image),
+            'thumbnailImage' => Storage::disk('images')->url($this->thumbnail_image),
             'videos' => $this->videos->map(fn(Video $video) => [
                 "id" => $video->id,
                 'name' => $video->name,
