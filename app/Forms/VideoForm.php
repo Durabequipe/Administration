@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use App\Models\Video;
+use App\Rules\VideoCanChooseThemeUniqueInProject;
 use App\Services\VideoService;
 use Closure;
 use Filament\Forms\Components\FileUpload;
@@ -59,12 +60,10 @@ class VideoForm extends Form
 
             Toggle::make('is_main')
                 ->rules(['boolean'])
-                ->default($params['video']['is_main'] ?? false)
                 ->columnSpan(12),
 
             Toggle::make('can_choose_theme')
-                ->rules(['boolean'])
-                ->default($params['video']['can_choose_theme'] ?? false)
+                ->rules(['boolean', new VideoCanChooseThemeUniqueInProject($params['project']['id'])])
                 ->columnSpan(12),
 
             TextInput::make('interaction_title')
@@ -127,6 +126,7 @@ class VideoForm extends Form
             'mobile_path' => is_array($this->video) ? $this->video['mobile_path'] : $this->video->getAttributes()['mobile_path'],
             'mobile_thumbnail' => is_array($this->video) ? $this->video['mobile_thumbnail'] : $this->video->getAttributes()['mobile_thumbnail'],
             'is_main' => $this->video['is_main'],
+            'can_choose_theme' => $this->video['can_choose_theme'],
             'interaction_title' => $this->video['interaction_title'],
             'project_id' => $this->video['project_id'],
         ];
