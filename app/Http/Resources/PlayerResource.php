@@ -30,6 +30,7 @@ class PlayerResource extends JsonResource
             'videos' => $this->videos->map(fn(Video $video) => [
                 "id" => $video->id,
                 'name' => $video->name,
+                'canChooseTheme' => (boolean)$video->can_choose_theme,
                 "paths" => [
                     $video->desktop_path,
                     $video->mobile_path

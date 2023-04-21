@@ -59,8 +59,12 @@ class VideoForm extends Form
 
             Toggle::make('is_main')
                 ->rules(['boolean'])
-                ->default('false')
-                ->default($params['video']['is_main'] ?? '')
+                ->default($params['video']['is_main'] ?? false)
+                ->columnSpan(12),
+
+            Toggle::make('can_choose_theme')
+                ->rules(['boolean'])
+                ->default($params['video']['can_choose_theme'] ?? false)
                 ->columnSpan(12),
 
             TextInput::make('interaction_title')

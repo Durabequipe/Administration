@@ -30,6 +30,7 @@ class Video extends Model
         'interaction_title',
         'position_x',
         'position_y',
+        'can_choose_theme'
     ];
 
     protected $searchableFields = ['*'];
