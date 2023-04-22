@@ -109,4 +109,9 @@ class Video extends Model
             'desktop_thumbnail' => app(VideoService::class)->generateThumbnailFromPath($this->mobile_path),
         ]);
     }
+
+    public function getThemeVideoAttribute(): ?Video
+    {
+        return (new VideoService)->getThemeVideo($this);
+    }
 }

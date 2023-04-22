@@ -33,7 +33,7 @@ class PlayerResource extends JsonResource
                 "id" => $video->id,
                 'name' => $video->name,
                 'canChooseTheme' => (boolean)$video->can_choose_theme,
-                'themeVideoId' => $videoService->getThemeVideo($video)?->id,
+                'themeVideoId' => $video->theme_video?->id,
                 "paths" => [
                     $video->desktop_path,
                     $video->mobile_path
