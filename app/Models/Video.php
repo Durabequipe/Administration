@@ -54,6 +54,11 @@ class Video extends Model
         return $this->belongsToMany(Video::class, 'adjacents_videos', 'video_id', 'adjacent_id')->withPivot('content');
     }
 
+    public function parents()
+    {
+        return $this->belongsToMany(Video::class, 'adjacents_videos', 'adjacent_id', 'video_id')->withPivot('content');
+    }
+
     public function videos()
     {
         return $this->belongsToMany(Video::class, 'adjacents_videos');

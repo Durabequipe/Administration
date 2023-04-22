@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Video;
+use App\Services\VideoService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -19,6 +20,7 @@ class PlayerResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $videoService = new VideoService;
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -31,6 +33,7 @@ class PlayerResource extends JsonResource
                 "id" => $video->id,
                 'name' => $video->name,
                 'canChooseTheme' => (boolean)$video->can_choose_theme,
+                'themeVideoId' => $videoService->getThemeVideo($video)?->id,
                 "paths" => [
                     $video->desktop_path,
                     $video->mobile_path

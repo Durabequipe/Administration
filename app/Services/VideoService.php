@@ -59,4 +59,27 @@ class VideoService
 
         return $ids;
     }
+
+    public function getAllParents(Video $video, $videos = []): array
+    {
+        $videos[] = $video;
+        foreach ($video->parents as $parent) {
+            $videos = $this->getAllParents($parent, $videos);
+        }
+
+        return $videos;
+    }
+
+    public function getThemeVideo(Video $video): ?Video
+    {
+        $videos = collect($this->getAllParents($video));
+
+        $videos = $videos->reverse();
+
+        $videos = $videos->reject(function ($video) {
+            return $video->can_choose_theme;
+        });
+
+        return $videos->first();
+    }
 }
