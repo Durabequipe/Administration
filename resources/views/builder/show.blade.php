@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="fixed z-[5] top-10 left-10 shadow-2xl p-5 h-16 rounded-2xl flex justify-around items-center">
+    <div class="fixed z-[11] top-10 left-10 shadow-2xl p-5 h-16 rounded-2xl flex justify-around items-center">
         <a class="cursor-pointer p-2 rounded mr-10" href="{{ route('builder.index') }}">
             <i class="fas fa-chevron-left mr-2"></i>Projets
         </a>
