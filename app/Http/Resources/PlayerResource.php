@@ -47,10 +47,10 @@ class PlayerResource extends JsonResource
                     "position" => $video->interaction->position,
                     "duration" => $video->interaction->delay,
                 ],
-                "interactions" => $video->adjacents->map(fn($adjacent) => [
+                "interactions" => $video->adjacents->count() != 0 ? $video->adjacents->map(fn($adjacent) => [
                     "id" => $adjacent->id,
                     "content" => $adjacent->pivot->content,
-                ]),
+                ]) : null,
             ])
         ];
     }
