@@ -30,7 +30,7 @@
                             'text-center',
 
 ]                       )>{{ $video->name }}</h2>
-                    <p class="text-white text-sm text-center p-0">{{ $video->interaction_title }}</p>
+
                 </div>
             </div>
 
