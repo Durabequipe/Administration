@@ -66,12 +66,12 @@ class VideoForm extends Form
                 ->rules(['boolean', new VideoCanChooseThemeUniqueInProject($params['project']['id'], $this->video['id'] ?? null)])
                 ->columnSpan(12),
 
-            TextInput::make('interaction_title')
+            /*TextInput::make('interaction_title')
                 ->label('Titre de l\'intéraction')
                 ->string()
                 ->maxLength(255)
                 ->required()
-                ->columnSpan(12),
+                ->columnSpan(12),*/
 
 
         ];
