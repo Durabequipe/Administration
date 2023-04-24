@@ -24,7 +24,7 @@ class VideoForm extends Form
     {
         return [
             Hidden::make('project_id')
-                ->default($params['project']['id']),
+                ->dehydrated(false),
 
             TextInput::make('name')
                 ->label('Nom')
@@ -63,7 +63,7 @@ class VideoForm extends Form
                 ->columnSpan(12),
 
             Toggle::make('can_choose_theme')
-                ->rules(['boolean', new VideoCanChooseThemeUniqueInProject($params['project']['id'])])
+                ->rules(['boolean', new VideoCanChooseThemeUniqueInProject($params['project']['id'], $this->video['id'] ?? null)])
                 ->columnSpan(12),
 
             TextInput::make('interaction_title')
