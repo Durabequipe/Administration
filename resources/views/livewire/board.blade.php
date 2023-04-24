@@ -1,4 +1,4 @@
-<div id="builder-area" class="absolute w-screen h-screen z-10">
+<div id="builder-area" class="absolute w-full h-full z-10">
 
     @foreach($project->videos as $video)
         <div
@@ -38,14 +38,12 @@
 
     @endforeach
 
-
-    <div id="buttons-area" class="z-[999] fixed flex bottom-10 w-screen justify-center">
-        <div class="w-48 h-16 bg-indigo-100 flex justify-around rounded-3xl ">
-            <button id="save" class="p-2 border m-2" onclick="Livewire.emit('modal:open', 'video-form', null)">
-                Ajouter une vidéo
-            </button>
-        </div>
-    </div>
-
 </div>
 
+<div id="buttons-area" class="z-[999] fixed right-10 bottom-10 justify-center">
+    <div class="w-48 h-16 bg-indigo-100 flex justify-around rounded-3xl ">
+        <button id="save" class="p-2 border m-2" onclick="Livewire.emit('modal:open', 'video-form', null)">
+            Ajouter une vidéo
+        </button>
+    </div>
+</div>

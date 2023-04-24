@@ -5,10 +5,10 @@ import {BezierConnector} from "@jsplumb/connector-bezier";
 
 const instance = jsPlumbBrowserUI.newInstance({
     container: document.querySelector("#builder-area"),
-    dragOptions: {
+    /*dragOptions: {
         containment: "parent",
         containmentPadding: 10
-    },
+    },*/
 });
 
 instance.importDefaults({

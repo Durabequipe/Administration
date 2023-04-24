@@ -8,6 +8,8 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/jsPlumb.js',
+                'resources/js/draggable.js',
+                'resources/js/zoomable.js',
             ],
             refresh: [
                 ...refreshPaths,
