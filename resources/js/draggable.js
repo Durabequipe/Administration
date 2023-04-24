@@ -8,7 +8,7 @@ let plumbBoardOffsetLeft;
 let plumbBoardOffsetTop;
 
 function startDrag(event) {
-    if (event.target.closest('.node') !== null) return;
+    if (event.target.closest('.node') !== null || event.target.tagName === "circle") return;
     mouseOffsetX = event.clientX - plumbBoard.offsetLeft;
     mouseOffsetY = event.clientY - plumbBoard.offsetTop;
     plumbBoardOffsetLeft = plumbBoard.offsetLeft;
