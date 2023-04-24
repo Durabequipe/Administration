@@ -1,4 +1,4 @@
-<div id="builder-area" class="absolute w-full h-full z-10">
+<div id="builder-area" class="absolute w-screen h-screen z-10">
 
     @foreach($project->videos as $video)
         <div
