@@ -81,10 +81,7 @@ class VideoForm extends Form
     {
         $video = Video::updateOrCreate([
             'id' => $this->video['id'] ?? null,
-        ], $state->toArray() + [
-                'position_x' => 100,
-                'position_y' => 200,
-            ]);
+        ], $state->toArray());
 
         $service->generateThumbnail($video);
 
