@@ -24,7 +24,7 @@ class VideoForm extends Form
     {
         return [
             Hidden::make('project_id')
-                ->dehydrated(false),
+                ->disabled(),
 
             TextInput::make('name')
                 ->label('Nom')
