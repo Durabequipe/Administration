@@ -11,9 +11,9 @@ use Illuminate\Translation\PotentiallyTranslatedString;
 class VideoCanChooseThemeUniqueInProject implements ValidationRule
 {
     private Project $project;
-    private Video $video;
+    private ?Video $video;
 
-    public function __construct(string $projectID, string $videoID)
+    public function __construct(string $projectID, ?string $videoID)
     {
         $this->project = Project::find($projectID);
         $this->video = Video::find($videoID);
@@ -28,7 +28,7 @@ class VideoCanChooseThemeUniqueInProject implements ValidationRule
     {
         $canChooseThemeExist = $this->project->videos()
             ->where('can_choose_theme', true)
-            ->where('id', '!=', $this->video->id)
+            ->where('id', '!=', $this->video?->id)
             ->exists();
         if ($value && $canChooseThemeExist) {
             $fail('Une seule vidéo peut avoir la possibilité de choisir un thème.');
