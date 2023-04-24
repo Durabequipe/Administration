@@ -6,7 +6,7 @@
             data-video-id="{{ $video->id }}"
             data-links="{{ json_encode($video->adjacents->map(fn($adjacent) => [
                  "id"=> $adjacent->id,
-                 "content" =>$adjacent->pivot->content,
+                 "content" => str($adjacent->pivot->content)->limit(20),
              ])) }}"
             @class([
                 'bg-green-500' => $video->is_main,
