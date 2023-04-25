@@ -80,7 +80,7 @@ class VideoService
         $index = $videos->search(fn(Video $video) => $video->can_choose_theme);
 
         //remove all videos before the index
-        $videos = $videos->slice($index);
+        $videos = $videos->slice($index + 1);
 
         return $videos->first();
     }
