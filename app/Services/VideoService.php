@@ -76,9 +76,11 @@ class VideoService
 
         $videos = $videos->reverse();
 
-        $videos = $videos->reject(function ($video) {
-            return $video->can_choose_theme;
-        });
+        //find the index where the video can choose a theme
+        $index = $videos->search(fn(Video $video) => $video->can_choose_theme);
+
+        //remove all videos before the index
+        $videos = $videos->slice($index);
 
         return $videos->first();
     }
